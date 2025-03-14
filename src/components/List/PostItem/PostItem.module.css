@@ -1,0 +1,35 @@
+.mainContainer {
+    display: grid; /* Активируем режим сетки */
+    grid-template-columns: 1fr 4fr 1fr; /* 3 колонки одинаковой ширины */
+    grid-gap: 10px; /* Промежуток между ячейками */
+    padding: 10px; /* Внутренний отступ для контейнера */
+    border: 1px solid black;
+  }
+   .leftColumn{
+    grid-column: 1;
+    display: grid;
+    grid-template-rows: 1fr 30px;
+  }
+  .centralColumn{
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+  }
+  .rightColumn{
+    grid-column: 3;
+    display: grid;
+  }
+  .item {
+    /* background-color: burlywood; Фоновый цвет для ячеек */
+    color: black; /* Цвет текста */
+    padding: 20px; /* Внутренний отступ для ячеек */
+    text-align: center; /* Выравнивание текста по центру */
+  }
+  .item1{
+    grid-row: 1;
+
+  }
+  .image{
+    width: 150px;
+
+  }
