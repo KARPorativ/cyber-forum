@@ -1,0 +1,48 @@
+.post-creator {
+    max-width: 1000px;
+    min-width:100px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.post-creator h1 {
+    text-align: center;
+}
+
+.post-creator form {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-creator input[type="text"],
+.post-creator textarea,
+.post-creator input[type="file"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.post-creator .tags {
+    margin: 10px 0;
+}
+
+.post-creator button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.post-creator button:hover {
+    background-color: #0056b3;
+}
+
+.textAr{
+    height: 500px;
+}

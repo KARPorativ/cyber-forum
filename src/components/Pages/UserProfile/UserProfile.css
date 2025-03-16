@@ -1,0 +1,62 @@
+.user-profile {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 70%; /* Установка ширины в 70% от ширины экрана */
+    max-width: 100%; /* Убираем максимальную ширину, если требуется, чтобы адаптироваться */
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Центрирование компонента */
+}
+
+.user-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+.username {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.quote {
+    font-style: italic;
+    color: #555;
+}
+
+.user-details p {
+    margin: 5px 0;
+}
+
+.tech-tags {
+    margin: 15px 0;
+}
+
+.tech-tag {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+.edit-profile-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-button:hover {
+    background-color: #0056b3;
+}

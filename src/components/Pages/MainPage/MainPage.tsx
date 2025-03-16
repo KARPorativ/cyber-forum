@@ -7,6 +7,7 @@ import Test from '../../test/Test'
 import axios from 'axios'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import Stack from '../../stack/Stack'
+import PostCard from '../../List/PostItem/PostCard'
 
 type Props = {}
 
@@ -45,12 +46,13 @@ export default function MainPage  (props: Props) {
   
   return (
     <div>
-         <Test></Test>
-         <div>dg {karpp}</div>
       <div className='main'>
         <Sorting></Sorting>
-      <List items = {posts} renderItem={(post) =>
+      {/* <List items = {posts} renderItem={(post) =>
         <PostItem post ={post}></PostItem>
+      }></List> */}
+      <List items = {posts} renderItem={(post) =>
+        <PostCard post ={post}></PostCard>
       }></List>
       <Stack></Stack>
       </div>
