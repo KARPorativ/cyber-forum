@@ -1,0 +1,13 @@
+.header {
+  background-color: #f5f5dc; /* бежевый фон */
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1); /* коричневая тень */
+  padding: 0.5rem 0;
+}
+.header a {
+  color: #8b4513; /* коричневый цвет текста */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.header a:hover {
+  color: #d2691e; /* более светлый коричневый при наведении */
+}

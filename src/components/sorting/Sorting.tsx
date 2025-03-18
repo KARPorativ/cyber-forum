@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from './Sorting.module.css';
+import { Link } from 'react-router-dom';
 
 type Props = {};
 interface AsideProps {
@@ -84,6 +85,9 @@ export default function Sorting({}: Props) {
           </label>
         </div>
         <button onClick={handleSearch}>Поиск</button>
+        <Link to="/profileedit">
+        <button>dfgg</button>
+        </Link>
       </aside>
     </div>
   );

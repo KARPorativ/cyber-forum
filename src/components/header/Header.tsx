@@ -1,54 +1,33 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-type Props = {}
-
-export default function Header({}: Props) {
+import React from 'react';
+import { Navbar, Container, Nav, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
+const Header: React.FC = () => {
   return (
-    <div>
-        <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className={styles.header}>
       <Container fluid>
-        <Navbar.Brand href="/">Кибер форум</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          Cyber Forum
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
+          <Nav 
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="question" >
-              Задать вопрос
-            </Nav.Link>
+            <Nav.Link as={Link} to="/">Главная</Nav.Link>
+            <Nav.Link as={Link} to="/questions">Вопросы</Nav.Link>
+            
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          
+          <Nav className="ms-auto">
+            <Nav.Link as={Link} to="/login">Войти</Nav.Link>
+            <Nav.Link as={Link} to="/register">Регистрация</Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </div>
-  )
-}
+  );
+};
+export default Header;

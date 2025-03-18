@@ -1,94 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfileEdit.css';
-
-const ProfileEdit: React.FC = () => {
-    const [avatar, setAvatar] = useState<string>('');
-    const [username, setUsername] = useState<string>('');
-    const [quote, setQuote] = useState<string>('');
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
-    const [middleName, setMiddleName] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
-    const [city, setCity] = useState<string>('');
-    const [about, setAbout] = useState<string>('');
-    const [email, setEmail] = useState<string>(''); // New state for email
-    const [tags, setTags] = useState<string[]>([]);
-
-    const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (value && !tags.includes(value)) {
-            setTags([...tags, value]);
+import axios from 'axios';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { setUser } from '../../../store/Slice/UserSlice';
+    interface User {
+    _id?: string;
+        avatar?: string;
+        username: string;
+        quote?: string;
+        firstName?: string;
+        lastName?: string;
+        middleName?: string;
+        phone?: string;
+        city?: string;
+        about?: string;
+        email?: string;
+    }
+    const ProfileEdit: React.FC<{  }> = ({  }) => {
+    const dispatch = useAppDispatch();
+    const userState = useAppSelector(state => state.user);
+        const [userData, setUserData] = useState<User>({
+    _id: userState._id || '',
+        username: userState.userName || '',
+        email: userState.email || '',
+        quote: userState.quote || '',
+        firstName: userState.firstName || '',
+        lastName: userState.lastName || '',
+        middleName: userState.middleName || '',
+        phone: userState.phone || '',
+        city: userState.city || '',
+        about: userState.about || '',
+        });
+    useEffect(() => {
+            setUserData({
+    _id: userState._id,
+            username: userState.userName,
+            email: userState.email,
+            quote: userState.quote,
+            firstName: userState.firstName,
+            lastName: userState.lastName,
+            middleName: userState.middleName,
+            phone: userState.phone,
+            city: userState.city,
+            about: userState.about,
+            });
+    }, [userState]);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setUserData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.patch(`http://localhost:5000/api/changeuser/${userState._id}`, userData);
+            if (response.status === 200) {
+                dispatch(setUser(response.data));
+                alert('Профиль успешно обновлен');
+        }
+        } catch (error) {
+            console.log("e",userState._id )
+            console.error('Ошибка при обновлении профиля:', error);
+            alert('Произошла ошибка при обновлении профиля');
         }
     };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Here you can add your logic to send data to the server.
-        console.log({
-            avatar,
-            username,
-            quote,
-            firstName,
-            lastName,
-            middleName,
-            phone,
-            city,
-            about,
-            email, // Include email in the logged data
-            tags,
-        });
-    };
-
     return (
         <div className="profile-edit">
-            <h1>Редактировать профиль</h1>
+            <h1>Редактирование профиля</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Аватарка:
-                    <input type="file" onChange={(e) => setAvatar(URL.createObjectURL(e.target.files![0]))} />
-                </label>
-                {avatar && <img src={avatar} alt="Avatar Preview" className="avatar-preview" />}
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                </label>
-                <label>
-                    Email: {/* New Email label */}
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} // Handle email changes
-                    />
-                </label>
-                <label>
-                    Цитата:
-                    <input type="text" value={quote} onChange={(e) => setQuote(e.target.value)} />
-                </label>
+                
                 <label>
                     Имя:
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text"
+                name="firstName"
+                value={userData.firstName}
+                onChange={handleChange}
+                placeholder="Имя" />
                 </label>
                 <label>
                     Фамилия:
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="text"
+                name="lastName"
+                value={userData.lastName}
+                onChange={handleChange}
+                placeholder="Фамилия" />
                 </label>
                 <label>
                     Отчество:
-                    <input type="text" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
+                    <input type="text"
+                name="middleName"
+                value={userData.middleName}
+                onChange={handleChange}
+                placeholder="Отчество" />
                 </label>
                 <label>
+                    Цитата:
+                    <input type="text"
+                name="quote"
+                value={userData.quote}
+                onChange={handleChange}
+                placeholder="quote" />
+                    </label>
+                <label>
                     Телефон:
-                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="text"
+                name="phone"
+                value={userData.phone}
+                onChange={handleChange}
+                placeholder="Телефон" />
                 </label>
                 <label>
                     Город:
-                    <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <input type="text"
+                name="city"
+                value={userData.city}
+                onChange={handleChange}
+                placeholder="Город" />
                 </label>
                 <label>
                     О себе:
-                    <textarea value={about} onChange={(e) => setAbout(e.target.value)}></textarea>
+                    <textarea name="about"
+                value={userData.about}
+                onChange={handleChange}
+                placeholder="О себе"></textarea>
                 </label>
-                <label>
+                {/* <label>
                     Теги технологий (введите и нажмите Enter):
                     <input type="text" onKeyDown={(e) => {
                         if (e.key === 'Enter') {
@@ -97,14 +135,14 @@ const ProfileEdit: React.FC = () => {
                             (e.target as HTMLInputElement).value = '';
                         }
                     }} />
-                </label>
-                <div className="tags-list">
+                </label> */}
+                {/* <div className="tags-list">
                     {tags.map((tag, index) => (
                         <span key={index} className="tag">
                             {tag}
                         </span>
                     ))}
-                </div>
+                </div> */}
                 <button type="submit">Сохранить изменения</button>
             </form>
         </div>

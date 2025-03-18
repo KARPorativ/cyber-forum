@@ -1,0 +1,22 @@
+.question-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.question-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.question-item h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2em;
+  color: #333;
+}
+.question-item p {
+  margin: 0;
+  color: #666;
+}

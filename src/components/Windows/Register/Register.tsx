@@ -62,10 +62,10 @@ const Register: React.FC = () => {
             {error && <div className={styles.error}>{error}</div>}
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.field}>
-                    <label htmlFor="username">Имя пользователя</label>
+                    <label htmlFor="userName">Имя пользователя</label>
                     <input
                         type="text"
-                        id="username"
+                        id="userName"
                         value={userName}
                         onChange={(e) => setUsername(e.target.value)}
                         className={styles.input}

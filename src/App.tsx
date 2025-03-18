@@ -17,6 +17,7 @@ import PostCreator from './components/Pages/PostCreator/PostCreator'
 import P from './components/Pages/P'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProfileEdit from './components/Pages/ProfileEdit/ProfileEdit'
+import QuestionList from './components/QuestionList/QuestionList'
 
 function App() {
 
@@ -66,7 +67,8 @@ function App() {
         <Route path='/p' element={<P/>}/>
         <Route path='/profile' element={<UserProfile avatarUrl={'src/foto/Никита.jpg'} username={'karp'} quote={'Рациональный иррационалист'} firstName={'Даниил'} lastName={'Розгоняев'} middleName={'Фёдорович'} phone={'89377992781'} city={'Самара'} about={'ывкрмрркврр'} techTags={["karp","cazan"]}/>}/>
         <Route path='/profileedit' element={<ProfileEdit/>}/>
-
+        <Route path='/questions' element={<QuestionList/>}/>
+        
         </Route>
       </Routes>
       
