@@ -1,13 +1,25 @@
 .header {
-  background-color: #f5f5dc; /* бежевый фон */
-  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1); /* коричневая тень */
-  padding: 0.5rem 0;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.header a {
-  color: #8b4513; /* коричневый цвет текста */
-  text-decoration: none;
-  transition: color 0.3s ease;
+.profileLink {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
 }
-.header a:hover {
-  color: #d2691e; /* более светлый коричневый при наведении */
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.userName {
+  font-weight: 500;
+  color: #333;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }

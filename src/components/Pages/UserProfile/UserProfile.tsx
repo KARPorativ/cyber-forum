@@ -30,9 +30,9 @@ const UserProfile: React.FC<UserProfileProps> = ({
     return (
         <div className="user-profile">
             <div className="user-profile-header">
-                <img src={avatarUrl} alt={`${username}'s avatar`} className="user-avatar" />
+<div className="user-profile-header">
+    <img src={avatarUrl || 'path/to/default-avatar.jpg'} alt={`${username}'s avatar`} className="user-avatar" />
                 <h2 className="username">{username}</h2>
-                <p className="quote">"{quote}"</p>
             </div>
             <div className="user-details">
                 <p><strong>Имя:</strong> {firstName}</p>
@@ -51,6 +51,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             <Link to={"/profileedit"}>
             <button className="edit-profile-button">Редактировать профиль</button>
             </Link>
+        </div>
         </div>
     );
 };
