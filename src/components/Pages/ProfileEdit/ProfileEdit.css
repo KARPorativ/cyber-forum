@@ -29,10 +29,14 @@ textarea {
     box-sizing: border-box;
 }
 
+.avatar-preview-container {
+    margin-top: 10px;
+}
 .avatar-preview {
-    display: block;
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
     margin-top: 10px;
 }
 

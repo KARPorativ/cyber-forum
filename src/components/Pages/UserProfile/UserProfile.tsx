@@ -1,9 +1,8 @@
 import React from 'react';
 import './UserProfile.css';
 import { Link } from 'react-router-dom';
-
+import { useAppSelector } from '../../../hooks/reduxHooks';
 interface UserProfileProps {
-    avatarUrl: string;
     username: string;
     quote: string;
     firstName: string;
@@ -14,9 +13,7 @@ interface UserProfileProps {
     about: string;
     techTags: string[];
 }
-
 const UserProfile: React.FC<UserProfileProps> = ({
-    avatarUrl,
     username,
     quote,
     firstName,
@@ -27,13 +24,23 @@ const UserProfile: React.FC<UserProfileProps> = ({
     about,
     techTags
 }) => {
+    // const defaultAvatar = '/default-avatar.jpg';
+    const defaultAvatar = 'src/foto/Никита.jpg';
+    const userAvatar = useAppSelector(state => state.user.avatar);
+    
     return (
         <div className="user-profile">
             <div className="user-profile-header">
 <div className="user-profile-header">
-    <img src={avatarUrl || 'path/to/default-avatar.jpg'} alt={`${username}'s avatar`} className="user-avatar" />
-                <h2 className="username">{username}</h2>
-            </div>
+                    <img 
+                        src={userAvatar ? `http://localhost:5000/${userAvatar}` : defaultAvatar} 
+                        alt={`${username}'s avatar`} 
+                        className="user-avatar"
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = defaultAvatar;
+                        }}
+                    />
             <div className="user-details">
                 <p><strong>Имя:</strong> {firstName}</p>
                 <p><strong>Фамилия:</strong> {lastName}</p>
@@ -53,7 +60,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             </Link>
         </div>
         </div>
+        </div>
     );
 };
-
 export default UserProfile;

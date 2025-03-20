@@ -16,9 +16,10 @@ interface User {
     about?: string;
     email?: string;
 }
-    const ProfileEdit: React.FC<{  }> = ({  }) => {
+const ProfileEdit: React.FC<{ }> = ({ }) => {
     const dispatch = useAppDispatch();
     const userState = useAppSelector(state => state.user);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [userData, setUserData] = useState<User>({
         _id: userState._id || '',
         username: userState.userName || '',
@@ -45,6 +46,14 @@ interface User {
             about: userState.about,
         });
     }, [userState]);
+    // Очистка URL при размонтировании компонента
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setUserData(prev => ({
@@ -52,29 +61,55 @@ interface User {
             [name]: value
         }));
     };
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-        // Validate avatar file if present
-        if (userData.avatar instanceof File) {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            
+            // Validate file type
             const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-            if (!validTypes.includes(userData.avatar.type)) {
+            if (!validTypes.includes(file.type)) {
                 alert('Пожалуйста, загрузите изображение в формате JPEG, PNG или GIF');
                 return;
             }
-            const MAX_SIZE = 5 * 1024 * 1024; // 5MB
-            if (userData.avatar.size > MAX_SIZE) {
+            // Validate file size (5MB max)
+            const MAX_SIZE = 5 * 1024 * 1024;
+            if (file.size > MAX_SIZE) {
                 alert('Размер файла не должен превышать 5MB');
                 return;
             }
+            
+            // Очищаем предыдущий URL, если он существует
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+            
+            // Создаем новый URL для предпросмотра
+            const newPreviewUrl = URL.createObjectURL(file);
+            setPreviewUrl(newPreviewUrl);
+            
+            // Сохраняем файл в состоянии
+            setUserData(prev => ({
+                ...prev,
+                avatar: file
+            }));
+        }
+    };
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+    
+        try {
+        // Базовая валидация
+        if (!userData.username.trim()) {
+            alert('Имя пользователя обязательно');
+            return;
         }
             const formData = new FormData();
-
-            // Append all user data to FormData
+            
+        // Добавляем все данные пользователя в FormData
             Object.keys(userData).forEach(key => {
                 if (key === 'avatar' && userData.avatar instanceof File) {
                     formData.append('avatar', userData.avatar);
-                } else {
+                } else if (userData[key as keyof User]) {
                     formData.append(key, userData[key as keyof User]?.toString() || '');
                 }
             });
@@ -84,11 +119,22 @@ interface User {
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                    }
+                },
                 }
             );
             if (response.status === 200) {
-                dispatch(setUser(response.data));
+            // Обновляем Redux store с новыми данными пользователя
+                dispatch(setUser({
+                    ...response.data,
+                avatar: response.data.avatar
+                }));
+                
+            // Очищаем URL предпросмотра
+                if (previewUrl) {
+                    URL.revokeObjectURL(previewUrl);
+                    setPreviewUrl(null);
+                }
+                
                 alert('Профиль успешно обновлен');
             }
         } catch (error) {
@@ -96,28 +142,28 @@ interface User {
             alert('Произошла ошибка при обновлении профиля');
         }
     };
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0];
-            setUserData(prev => ({
-                ...prev,
-                avatar: file
-            }));
-        }
-    };
     return (
         <div className="profile-edit">
             <h1>Редактирование профиля</h1>
             <form onSubmit={handleSubmit}>
-
                 <label>
                     Аватар:
+                    <div className="avatar-preview-container">
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleFileChange}
                     />
+                        {previewUrl && (
+                            <img
+                                src={previewUrl}
+                                alt="Preview"
+                                className="avatar-preview"
+                            />
+                        )}
+                    </div>
                 </label>
+                {/* Остальные поля формы остаются без изменений */}
                 <label>
                     <input type="text"
                         name="lastName"
@@ -164,6 +210,14 @@ interface User {
                         onChange={handleChange}
                         placeholder="О себе"></textarea>
                 </label>
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    );
+};
+                //     </div>
+                // </label>
+               
                 {/* <label>
                     Теги технологий (введите и нажмите Enter):
                     <input type="text" onKeyDown={(e) => {
@@ -181,10 +235,7 @@ interface User {
                         </span>
                     ))}
                 </div> */}
-                <button type="submit">Сохранить изменения</button>
-            </form>
-        </div>
-    );
-};
+                
+            
 
 export default ProfileEdit;
