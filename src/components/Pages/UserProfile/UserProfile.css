@@ -1,35 +1,55 @@
 .user-profile {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 70%; /* Установка ширины в 70% от ширины экрана */
-    max-width: 100%; /* Убираем максимальную ширину, если требуется, чтобы адаптироваться */
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-    margin: 0 auto; /* Центрирование компонента */
+    max-width: 800px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .user-profile-header {
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+.avatar-section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 1rem;
 }
-
 .user-avatar {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-right: 15px;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.user-main-info {
+    text-align: center;
+}
 .username {
-    font-size: 1.5em;
+    font-size: 2rem;
+    font-weight: 600;
     margin: 0;
+    color: #333;
 }
-
 .quote {
     font-style: italic;
     color: #555;
+    margin: 0.5rem 0;
+}
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
 }
 
 .user-details p {

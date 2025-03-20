@@ -9,6 +9,7 @@ interface UserState {
     firstName: string;
     lastName: string;
     middleName: string;
+    tags: string[];
     phone: string;
     city: string;
     about: string;
@@ -29,6 +30,7 @@ const initialState: UserState = {
     city: '',
     about: '',
     avatar: '',
+    tags: [],
     loading: false,
     error: null,
 };
@@ -38,7 +40,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserState>) => {
-    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar } = action.payload;
+    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar,tags } = action.payload;
             state._id = _id;
             state.userName = userName;
             state.email = email;
@@ -49,6 +51,7 @@ const userSlice = createSlice({
             state.phone = phone;
             state.city = city;
             state.about = about;
+            state.tags = tags;
     state.avatar = avatar;
 },
         resetUser: (state) => {
@@ -62,6 +65,7 @@ const userSlice = createSlice({
             state.phone = '';
             state.city = '';
             state.about = '';
+            state.tags = [];
             state.avatar = '';
         },
     }

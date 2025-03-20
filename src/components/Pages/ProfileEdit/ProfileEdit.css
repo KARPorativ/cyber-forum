@@ -67,3 +67,29 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+}
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.tag-remove {
+    background: none;
+    border: none;
+    margin-left: 4px;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    padding: 0 4px;
+}
+.tag-remove:hover {
+    color: #ff4444;
+}

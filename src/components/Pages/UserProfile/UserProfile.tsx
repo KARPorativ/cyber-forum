@@ -3,7 +3,9 @@ import './UserProfile.css';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/reduxHooks';
 interface UserProfileProps {
-    username: string;
+    _id: string;
+    userName: string;
+    email: string;
     quote: string;
     firstName: string;
     lastName: string;
@@ -11,55 +13,55 @@ interface UserProfileProps {
     phone: string;
     city: string;
     about: string;
-    techTags: string[];
+    avatar: string;
+    tags?: string[];
+    loading?: boolean;
+    error?: string | null;
 }
-const UserProfile: React.FC<UserProfileProps> = ({
-    username,
-    quote,
-    firstName,
-    lastName,
-    middleName,
-    phone,
-    city,
-    about,
-    techTags
-}) => {
-    // const defaultAvatar = '/default-avatar.jpg';
+const UserProfile: React.FC = () => {
     const defaultAvatar = 'src/foto/Никита.jpg';
-    const userAvatar = useAppSelector(state => state.user.avatar);
+    const user = useAppSelector(state => state.user);
     
     return (
         <div className="user-profile">
             <div className="user-profile-header">
-<div className="user-profile-header">
+                <div className="avatar-section">
                     <img 
-                        src={userAvatar ? `http://localhost:5000/${userAvatar}` : defaultAvatar} 
-                        alt={`${username}'s avatar`} 
+                        src={user.avatar ? `http://localhost:5000/${user.avatar}` : defaultAvatar} 
+                        alt={`${user.userName}'s avatar`} 
                         className="user-avatar"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.src = defaultAvatar;
                         }}
                     />
+                    <div className="user-main-info">
+                        <h2 className="username">{user.userName}</h2>
+                        <p className="quote">"{user.quote}"</p>
+                </div>
+                </div>
             <div className="user-details">
-                <p><strong>Имя:</strong> {firstName}</p>
-                <p><strong>Фамилия:</strong> {lastName}</p>
-                <p><strong>Отчество:</strong> {middleName}</p>
-                <p><strong>Телефон:</strong> {phone}</p>
-                <p><strong>Город:</strong> {city}</p>
-                <p><strong>О себе:</strong> {about}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Имя:</strong> {user.firstName}</p>
+                <p><strong>Фамилия:</strong> {user.lastName}</p>
+                <p><strong>Отчество:</strong> {user.middleName}</p>
+                <p><strong>Телефон:</strong> {user.phone}</p>
+                <p><strong>Город:</strong> {user.city}</p>
+                <p><strong>О себе:</strong> {user.about}</p>
+                
+                {user.tags && user.tags.length > 0 && (
+                    <div className="tech-tags">
+                        <p><strong>Теги:</strong></p>
+                        {user.tags.map((tag, index) => (
+                            <span key={index} className="tech-tag">{tag}</span>
+                        ))}
+                    </div>
+                )}
             </div>
-            <div className="tech-tags">
-                <strong>Технологии:</strong>
-                {techTags.map((tag, index) => (
-                    <span key={index} className="tech-tag">{tag}</span>
-                ))}
             </div>
-            <Link to={"/profileedit"}>
+            <Link to="/profileedit" className="edit-profile-link">
             <button className="edit-profile-button">Редактировать профиль</button>
             </Link>
-        </div>
-        </div>
         </div>
     );
 };

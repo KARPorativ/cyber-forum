@@ -15,11 +15,13 @@ interface User {
     city?: string;
     about?: string;
     email?: string;
+    tags?: string[];
 }
 const ProfileEdit: React.FC<{ }> = ({ }) => {
     const dispatch = useAppDispatch();
     const userState = useAppSelector(state => state.user);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [tagInput, setTagInput] = useState<string>('');
     const [userData, setUserData] = useState<User>({
         _id: userState._id || '',
         username: userState.userName || '',
@@ -31,6 +33,7 @@ const ProfileEdit: React.FC<{ }> = ({ }) => {
         phone: userState.phone || '',
         city: userState.city || '',
         about: userState.about || '',
+        tags: userState.tags || [],
     });
     useEffect(() => {
         setUserData({
@@ -54,6 +57,24 @@ const ProfileEdit: React.FC<{ }> = ({ }) => {
             }
         };
     }, [previewUrl]);
+const handleTagInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && tagInput.trim()) {
+        e.preventDefault();
+        if (!userData.tags?.includes(tagInput.trim())) {
+        setUserData(prev => ({
+            ...prev,
+                tags: [...(prev.tags || []), tagInput.trim()]
+            }));
+        }
+        setTagInput('');
+    }
+};
+const handleRemoveTag = (tagToRemove: string) => {
+    setUserData(prev => ({
+        ...prev,
+        tags: prev.tags?.filter(tag => tag !== tagToRemove) || []
+        }));
+    };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setUserData(prev => ({
@@ -165,6 +186,15 @@ const ProfileEdit: React.FC<{ }> = ({ }) => {
                 </label>
                 {/* Остальные поля формы остаются без изменений */}
                 <label>
+                Имя:
+                    <input type="text"
+                        name="firstName"
+                        value={userData.firstName}
+                        onChange={handleChange}
+                        placeholder="имя" />
+                </label>
+                <label>
+                Фамилия:
                     <input type="text"
                         name="lastName"
                         value={userData.lastName}
@@ -210,31 +240,36 @@ const ProfileEdit: React.FC<{ }> = ({ }) => {
                         onChange={handleChange}
                         placeholder="О себе"></textarea>
                 </label>
+                <label>
+                    Теги:
+                    <input
+                        type="text"
+                        value={tagInput}
+                        onChange={(e) => setTagInput(e.target.value)}
+                        onKeyDown={handleTagInput}
+                        placeholder="Введите тег и нажмите Enter"
+                    />
+                </label>
+                <div className="tags-container">
+                    {userData.tags?.map((tag) => (
+                        <span key={tag} className="tag">
+                            {tag}
+                            <button
+                                type="button"
+                                className="tag-remove"
+                                onClick={() => handleRemoveTag(tag)}
+                            >
+                                ×
+                            </button>
+                        </span>
+                    ))}
+                </div>
                 <button type="submit">Сохранить изменения</button>
             </form>
         </div>
     );
 };
-                //     </div>
-                // </label>
-               
-                {/* <label>
-                    Теги технологий (введите и нажмите Enter):
-                    <input type="text" onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            e.preventDefault();
-                            handleTagsChange(e as unknown as React.ChangeEvent<HTMLInputElement>);
-                            (e.target as HTMLInputElement).value = '';
-                        }
-                    }} />
-                </label> */}
-                {/* <div className="tags-list">
-                    {tags.map((tag, index) => (
-                        <span key={index} className="tag">
-                            {tag}
-                        </span>
-                    ))}
-                </div> */}
+                
                 
             
 
