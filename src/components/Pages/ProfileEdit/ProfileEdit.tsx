@@ -47,6 +47,7 @@ const ProfileEdit: React.FC<{ }> = ({ }) => {
             phone: userState.phone,
             city: userState.city,
             about: userState.about,
+            tags: userState.tags || [], // Ensure tags are included in the update
         });
     }, [userState]);
     // Очистка URL при размонтировании компонента
