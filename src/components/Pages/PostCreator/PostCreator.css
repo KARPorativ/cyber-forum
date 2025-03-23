@@ -46,3 +46,16 @@
 .textAr{
     height: 500px;
 }
+.image-upload-container {
+    margin-bottom: 15px;
+}
+.image-preview {
+    margin-top: 10px;
+    max-width: 300px;
+}
+.image-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
