@@ -44,7 +44,7 @@
 }
 
 .textAr{
-    height: 500px;
+    height: 200px;
 }
 .image-upload-container {
     margin-bottom: 15px;
@@ -58,4 +58,24 @@
     height: auto;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+
+.quill-editor {
+    margin-bottom: 20px;
+    background: white;
+}
+
+.ql-editor {
+    min-height: 300px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.ql-toolbar {
+    border-radius: 4px 4px 0 0;
+}
+
+.ql-container {
+    border-radius: 0 0 4px 4px;
 }

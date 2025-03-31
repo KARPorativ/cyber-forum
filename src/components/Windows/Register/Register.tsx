@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Register.module.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Register: React.FC = () => {
@@ -9,7 +10,7 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
-    
+    const navigate = useNavigate();
 
     const handleSubmit = async  (e: React.FormEvent) => {
         e.preventDefault();
@@ -35,6 +36,7 @@ const Register: React.FC = () => {
                 setUsername('');
                 setEmail('');
                 setPassword('');
+                
             }
         } catch (err: any) {
             // Обработка ошибок во время запроса
@@ -54,6 +56,7 @@ const Register: React.FC = () => {
         setUsername('');
         setEmail('');
         setPassword('');
+        navigate('/login');
     };
 
     return (

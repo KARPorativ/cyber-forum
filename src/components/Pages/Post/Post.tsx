@@ -34,7 +34,7 @@ const Post: React.FC<PostProps> = ({
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
   };
-
+  console.log('comments', comments)
   return (
     <div className="post">
       <h1 className="post-title">{title}</h1>
@@ -54,11 +54,11 @@ const Post: React.FC<PostProps> = ({
         <button onClick={handleLikeClick} className="like-button">👍 {likeCount}</button>
       </div>
       <div className="post-comments">
-        {comments.map((comment) => (
+        {comments ? comments.map((comment) => (
           <div key={comment.id} className="comment">
             {comment.text}
           </div>
-        ))}
+        )) : <div>Пустота в твоем сердце</div>}
       </div>
     </div>
   );

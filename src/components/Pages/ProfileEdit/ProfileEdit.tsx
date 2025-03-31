@@ -3,6 +3,7 @@ import './ProfileEdit.css';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { setUser } from '../../../store/Slice/UserSlice';
+import { useNavigate } from 'react-router-dom';
 interface User {
     _id?: string;
     avatar?: string | File;
@@ -19,6 +20,7 @@ interface User {
 }
 const ProfileEdit: React.FC<{ }> = ({ }) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const userState = useAppSelector(state => state.user);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [tagInput, setTagInput] = useState<string>('');
@@ -157,7 +159,7 @@ const handleRemoveTag = (tagToRemove: string) => {
                     setPreviewUrl(null);
                 }
                 
-                alert('Профиль успешно обновлен');
+                navigate('/profile');
             }
         } catch (error) {
             console.error('Ошибка при обновлении профиля:', error);
