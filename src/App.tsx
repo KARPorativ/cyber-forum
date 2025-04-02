@@ -25,10 +25,10 @@ function App() {
 
   useEffect(() => {
     selectOption();
-  
-    
+
+
   }, [])
-  
+
 
   const selectOption = () => {
     try {
@@ -56,22 +56,21 @@ function App() {
 
   return (
     <div>
-      
+
       <Routes>
-        <Route path="/"  element={<Layout/>}>
-        <Route index element={<MainPage/>}/>
-        <Route path='/question' element={<Question/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/addpost' element={<PostCreator/>}/>
-        <Route path='/p' element={<P/>}/>
-        <Route path='/profile' element={<UserProfile avatarUrl={'src/foto/Никита.jpg'} username={'karp'} quote={'Рациональный иррационалист'} firstName={'Даниил'} lastName={'Розгоняев'} middleName={'Фёдорович'} phone={'89377992781'} city={'Самара'} about={'ывкрмрркврр'} techTags={["karp","cazan"]}/>}/>
-        <Route path='/profileedit' element={<ProfileEdit/>}/>
-        <Route path='/questions' element={<QuestionList/>}/>
-        
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path='/question' element={<Question />} />
+          <Route path='/addpost' element={<PostCreator />} />
+          <Route path='/p' element={<P />} />
+          <Route path='/profile' element={<UserProfile avatarUrl={'src/foto/Никита.jpg'} username={'karp'} quote={'Рациональный иррационалист'} firstName={'Даниил'} lastName={'Розгоняев'} middleName={'Фёдорович'} phone={'89377992781'} city={'Самара'} about={'ывкрмрркврр'} techTags={["karp", "cazan"]} />} />
+          <Route path='/profileedit' element={<ProfileEdit />} />
+          <Route path='/questions' element={<QuestionList />} />
         </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
-      
+
     </div>
   )
 }

@@ -1,16 +1,12 @@
 import React from 'react';
+import { IPost } from '../../../types/Post';
 
 interface PostProps {
-    userImage: string;
-    userName: string;
-    title: string;
-    description: string;
-    tags: string[];
-    commentsCount: number;
-    rating: number;
+    post: IPost;
 }
 
-const PostCard: React.FC<PostProps> =  (post: PostProps) => {
+const PostCard: React.FC<PostProps> =  ({post}) => {
+    console.log('post', post)
     return (
         <div style={styles.card}>
             <div style={styles.header}>
@@ -20,8 +16,8 @@ const PostCard: React.FC<PostProps> =  (post: PostProps) => {
                     <span >{new Date().toLocaleDateString()}</span>
                 </div>
             </div>
-            <h3 style={styles.title}>title</h3>
-            <p style={styles.description}>description</p>
+            <h3 style={styles.title}>{post.title || 'Нет заголовка'}</h3>
+            <p style={styles.description}>{post.description || 'Нет описания'}</p>
             <div style={styles.tags}>
                 {/* {tags.map((tag, index) => (
                     <span key={index} style={styles.tag}>
