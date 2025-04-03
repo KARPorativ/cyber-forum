@@ -7,3 +7,8 @@ export interface IPost {
     commentsCount: number;
     rating: number;
 }
+
+export interface Tag {
+    tag: string;
+    tagCount: number;
+  }

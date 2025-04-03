@@ -6,7 +6,7 @@ interface PostProps {
 }
 
 const PostCard: React.FC<PostProps> =  ({post}) => {
-    console.log('post', post)
+    // console.log('post', post)
     return (
         <div style={styles.card}>
             <div style={styles.header}>

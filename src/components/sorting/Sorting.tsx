@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './Sorting.module.css';
-import { Link } from 'react-router-dom';
-
-type Props = {};
-interface AsideProps {
-  onSearch: (searchParams: SearchParams) => void;
-}
+import { Link, useSearchParams } from 'react-router-dom';
 
 interface SearchParams {
   title: string;
@@ -15,18 +10,29 @@ interface SearchParams {
   showClosed: boolean;
 }
 
-export default function Sorting({}: Props) {
+export default function Sorting() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Инициализация состояний из URL параметров
+  const [title, setTitle] = useState(searchParams.get('title') || '');
+  const [author, setAuthor] = useState(searchParams.get('author') || '');
+  const [stack, setStack] = useState(searchParams.get('stack') || '');
+  const [sort, setSort] = useState(searchParams.get('sort') || 'asc');
+  const [showClosed, setShowClosed] = useState(
+    searchParams.get('showClosed') === 'true' || false
+  );
 
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [stack, setStack] = useState(''); // Изначально пустое значение
-  const [sort, setSort] = useState('asc'); // Можно использовать 'asc' или 'desc'
-  const [showClosed, setShowClosed] = useState(false);
-
-  const handleSearch = () => {
-      const searchParams: SearchParams = { title, author, stack, sort, showClosed };
-      // onSearch(searchParams);
-  };
+  // Эффект для обновления URL при изменении параметров
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (title) params.set('title', title);
+    if (author) params.set('author', author);
+    if (stack) params.set('stack', stack);
+    params.set('sort', sort);
+    params.set('showClosed', showClosed.toString());
+    
+    setSearchParams(params);
+  }, [title, author, stack, sort, showClosed, setSearchParams]);
 
   return (
     <div className={classes.wrapper}>
@@ -84,10 +90,8 @@ export default function Sorting({}: Props) {
             />
           </label>
         </div>
-        <button onClick={handleSearch}>Поиск</button>
-        <Link to="/profileedit">
-        <button>dfgg</button>
-        </Link>
+        
+          <button>dfgg</button>
       </aside>
     </div>
   );
