@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css';
+import { useParams } from 'react-router-dom';
 
 interface Comment {
   id: number;
@@ -35,6 +36,7 @@ const Post: React.FC<PostProps> = ({
     setLikeCount(likeCount + 1);
   };
   console.log('comments', comments)
+  const {_id} = useParams();
   return (
     <div className="post">
       <h1 className="post-title">{title}</h1>

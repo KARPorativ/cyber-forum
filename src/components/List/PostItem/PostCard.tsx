@@ -1,5 +1,6 @@
 import React from 'react';
 import { IPost } from '../../../types/Post';
+import { Link } from 'react-router-dom';
 
 interface PostProps {
     post: IPost;
@@ -7,7 +8,9 @@ interface PostProps {
 
 const PostCard: React.FC<PostProps> =  ({post}) => {
     console.log('post', post)
+
     return (
+        <Link to={`/post/${post._id}`}>
         <div style={styles.card}>
             <div style={styles.header}>
                 <img src='src/foto/Никита.jpg' alt={post.userName} style={styles.userImage} />
@@ -21,15 +24,16 @@ const PostCard: React.FC<PostProps> =  ({post}) => {
             <div style={styles.tags}>
                 {/* {tags.map((tag, index) => (
                     <span key={index} style={styles.tag}>
-                        {tag}
+                    {tag}
                     </span>
-                ))} */}
+                    ))} */}
             </div>
             <div style={styles.footer}>
                 <span style={styles.comments}>Комментарии: commentsCount</span>
                 <span style={styles.rating}>Оценка: rating</span>
             </div>
         </div>
+                    </Link>
     );
 };
 

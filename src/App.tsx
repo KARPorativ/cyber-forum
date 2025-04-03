@@ -14,10 +14,11 @@ import Question from './components/question/Question'
 import Login from './components/Windows/Login/Login'
 import Register from './components/Windows/Register/Register'
 import PostCreator from './components/Pages/PostCreator/PostCreator'
-import P from './components/Pages/P'
+import P from './components/Pages/PostFull'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProfileEdit from './components/Pages/ProfileEdit/ProfileEdit'
 import QuestionList from './components/QuestionList/QuestionList'
+import PostFull from './components/Pages/PostFull'
 
 function App() {
 
@@ -62,10 +63,11 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path='/question' element={<Question />} />
           <Route path='/addpost' element={<PostCreator />} />
-          <Route path='/p' element={<P />} />
+          {/* <Route path='/p' element={<PostFull />} /> */}
           <Route path='/profile' element={<UserProfile avatarUrl={'src/foto/Никита.jpg'} username={'karp'} quote={'Рациональный иррационалист'} firstName={'Даниил'} lastName={'Розгоняев'} middleName={'Фёдорович'} phone={'89377992781'} city={'Самара'} about={'ывкрмрркврр'} techTags={["karp", "cazan"]} />} />
           <Route path='/profileedit' element={<ProfileEdit />} />
           <Route path='/questions' element={<QuestionList />} />
+          <Route path="/post/:_id" element={<PostFull/>} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

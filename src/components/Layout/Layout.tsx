@@ -13,7 +13,7 @@ type Props = {}
 
 export default function Layout (props: Props) {
 
-  useIsAuth();
+  // useIsAuth();
   
   return (
     <div>
