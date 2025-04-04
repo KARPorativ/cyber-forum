@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from "./Post/Post";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 interface Comment {
   id: number;
@@ -14,22 +15,28 @@ interface PostProps {
   description: string;
   datePublication: string;
   likesCount: number;
-  tags: string[];
+  tags: [
+    _id: string,
+    tag: string,
+  ];
   comments: Comment[];
-  user: {
+  author: {
     avatar?: string | File;
     userName: string;
   };
 }
 
 const App: React.FC = () => {
+  const defaultAvatar = 'src/foto/Никита.jpg';
   // Получаем _id из URL
+  const userState = useAppSelector(state => state.user);
   const { _id } = useParams<{ _id: string }>();
   const [post, setPost] = useState<PostProps | null>(null); // Храним данные полученного поста
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [likeCount, setLikeCount] = useState<number>(0);
-console.log(_id,"dgg");
+  const [newComment, setNewComment] = useState<string>("");
+
   // Функция для загрузки поста с сервера
   const fetchPost = async () => {
     setLoading(true);
@@ -49,6 +56,26 @@ console.log(_id,"dgg");
     }
   };
 
+  const handleCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newComment) return;
+
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/post/${_id}/comment`,
+        { text: newComment, idUser: userState._id }
+      );
+      // Добавление нового комментария в состояние
+      setPost((prevPost) =>
+        prevPost
+          ? { ...prevPost, comments: [...prevPost.comments, response.data] }
+          : null
+      );
+      setNewComment(""); // Очистка поля ввода
+    } catch (err) {
+      console.error("Ошибка при добавлении комментария", err);
+    }
+  };
   // Загружаем пост при монтировании компонента
   // useEffect(() => {
   //   if (_id) {
@@ -57,11 +84,14 @@ console.log(_id,"dgg");
   //   }
   // }, [_id]);
   useEffect(() => {
-    
-      console.log("uw");
-      fetchPost();
-    
+
+
+    fetchPost();
+
   }, []);
+
+
+
 
   // Лайк-функция
   const handleLikeClick = async () => {
@@ -86,83 +116,76 @@ console.log(_id,"dgg");
   }
 
   return (
-    // <div>
-    //   <div className="post">
-    //     <h1 className="post-title">{post.title}</h1>
-    //     <p className="post-description">{post.description}</p>
-    //     <p className="post-date">Дата публикации: {post.datePublication}</p>
-    //     <div className="post-user-info">
-    //       {/* <img
-    //         src={post.user.avatar}
-    //         alt="user-icon"
-    //         className="user-icon"
-    //       /> */}
-    //       {/* <span className="username">{post.user.userName}</span> */}
-    //     </div>
-    //     <div className="post-likes">
-    //       <button onClick={handleLikeClick} className="like-button">
-    //         👍 {likeCount}
-    //       </button>
-    //     </div>
-    //     <div className="post-tags">
-    //       {post.tags.map((tag, index) => (
-    //         <span key={index} className="tag">
-    //           #{tag}
-    //         </span>
-    //       ))}
-    //     </div>
-    //     <div className="post-comments">
-    //       {post.comments.length ? (
-    //         post.comments.map((comment) => (
-    //           <div key={comment.id} className="comment">
-    //             {comment.text}
-    //           </div>
-    //         ))
-    //       ) : (
-    //         <div>Комментариев пока нет</div>
-    //       )}
-    //     </div>
-    //   </div>
-    // </div>
+
     <div style={styles.postContainer}>
-    <div style={styles.header}>
-      {/* <img
+      <div style={styles.header}>
+        {/* <img
         src={
-          typeof post.user.avatar === "string"
-            ? post.user.avatar
-            : post.user.avatar ? URL.createObjectURL(post.user.avatar) : "https://via.placeholder.com/50" // Заглушка для аватара
+          typeof post.author.avatar === "string"
+            ? post.author.avatar
+            : post.author.avatar ? URL.createObjectURL(post.author.avatar) : "src/foto/Никита.jpg" // Заглушка для аватара
         }
-        alt={`${post.user.userName}'s avatar`}
+        alt={`${post.author.userName}'s avatar`}
         style={styles.avatar}
       /> */}
-      <h2 style={styles.userName}>{post.user.userName}</h2>
-    </div>
+        <img
+          src={post.author.avatar ? `http://localhost:5000/${post.author.avatar}` : defaultAvatar}
+          alt={`${post.author.userName}'s avatar`}
+          className="user-avatar"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = defaultAvatar;
+          }}
+        />
+        <h2 style={styles.userName}>{post.author.userName}</h2>
+      </div>
 
-    <div style={styles.body}>
-      <h1 style={styles.title}>{post.title}</h1>
-      <p style={styles.description}>{post.description}</p>
-      <p style={styles.date}>Опубликовано: {post.datePublication}</p>
-      <p style={styles.likes}>👍 {post.likesCount} лайков</p>
+      <div style={styles.body}>
+        <h1 style={styles.title}>{post.title}</h1>
+        <p style={styles.description}>{post.description}</p>
+        <p style={styles.date}>Опубликовано: {post.datePublication}</p>
+        <p style={styles.likes}>👍 {post.likesCount} лайков</p>
 
-      <div style={styles.tagsContainer}>
-        {post.tags.map((tag, index) => (
-          <span key={index} style={styles.tag}>
-            #{tag}
-          </span>
+        <div style={styles.tagsContainer}>
+          {post.tags.map((tag, index) => (
+            <span key={index} style={styles.tag}>
+              #{tag.tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* <div style={styles.commentsContainer}>
+        <h3>Комментарии ({post.comments.length}):</h3>
+        {post.comments.map((comment) => (
+          <div key={comment.id} style={styles.comment}>
+            <strong>{comment.author}</strong>: <span>{comment.text}</span>
+          </div>
         ))}
+      </div> */}
+      <div style={styles.commentsContainer}>
+        <h3>Комментарии ({post.comments.length}):</h3>
+        {post.comments.map((comment) => (
+          <div key={comment.id} style={styles.comment}>
+            <strong>{comment.author}</strong>: <span>{comment.text}</span>
+          </div>
+        ))}
+
+        {/* Форма для добавления нового комментария */}
+        <form onSubmit={handleCommentSubmit} style={styles.commentForm}>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Оставьте комментарий..."
+            style={styles.textArea}
+          />
+          <button type="submit" style={styles.submitButton}>
+            Добавить комментарий
+          </button>
+        </form>
       </div>
     </div>
-
-    <div style={styles.commentsContainer}>
-      <h3>Комментарии ({post.comments.length}):</h3>
-      {post.comments.map((comment) => (
-        <div key={comment.id} style={styles.comment}>
-          <strong>{comment.author}</strong>: <span>{comment.text}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+  );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {

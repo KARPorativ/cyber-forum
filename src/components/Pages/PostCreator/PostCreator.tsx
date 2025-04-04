@@ -89,7 +89,7 @@ const PostCreator: React.FC = () => {
         const plainTextContent = new DOMParser().parseFromString(content, 'text/html').body.textContent || "";
 
         const formData = new FormData();
-        formData.append('_id', _id);
+        formData.append('author', _id);
         formData.append('title', title);
         formData.append('content', plainTextContent);
         if (image) {
@@ -156,7 +156,6 @@ const PostCreator: React.FC = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
-                        required
                     />
                     {imagePreview && (
                         <div className="image-preview">

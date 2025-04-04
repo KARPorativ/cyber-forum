@@ -7,6 +7,7 @@ interface PostProps {
 }
 
 const PostCard: React.FC<PostProps> =  ({post}) => {
+    // console.log('post', post)
     console.log('post', post)
 
     return (
