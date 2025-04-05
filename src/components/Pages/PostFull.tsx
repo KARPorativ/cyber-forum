@@ -5,9 +5,14 @@ import Post from "./Post/Post";
 import { useAppSelector } from "../../hooks/reduxHooks";
 
 interface Comment {
-  id: number;
-  author: string;
+  _id: number;
+  author: {
+    avatar?: string | File;
+    userName: string; 
+  }
   text: string;
+  datePublication: string;
+  likes: number;
 }
 
 interface PostProps {
@@ -59,6 +64,7 @@ const App: React.FC = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newComment) return;
+    console.log(userState._id,"userState._id");
 
     try {
       const response = await axios.post(
@@ -66,9 +72,24 @@ const App: React.FC = () => {
         { text: newComment, idUser: userState._id }
       );
       // Добавление нового комментария в состояние
+      // setPost((prevPost) =>
+      //   prevPost
+      //     ? { ...prevPost, comments: [...prevPost.comments, response.data] }
+      //     : null
+      // );
       setPost((prevPost) =>
         prevPost
-          ? { ...prevPost, comments: [...prevPost.comments, response.data] }
+          ? {
+              ...prevPost,
+              comments: [
+                ...prevPost.comments,
+                {
+                  ...response.data,
+                  likes: response.data.likes || 0,
+                  datePublication: response.data.datePublication || new Date().toISOString(),
+                },
+              ],
+            }
           : null
       );
       setNewComment(""); // Очистка поля ввода
@@ -166,9 +187,34 @@ const App: React.FC = () => {
       <div style={styles.commentsContainer}>
         <h3>Комментарии ({post.comments.length}):</h3>
         {post.comments.map((comment) => (
-          <div key={comment.id} style={styles.comment}>
-            <strong>{comment.author}</strong>: <span>{comment.text}</span>
-          </div>
+          // <div key={comment._id} style={styles.comment}>
+          //   <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
+          // </div>
+          <div key={comment._id} style={styles.comment}>
+  {/* <img
+    src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar}
+    alt={`${comment.author.userName}'s avatar`}
+    className="user-avatar"
+    onError={(e) => {
+      const target = e.target as HTMLImageElement;
+      target.src = defaultAvatar;
+    }}
+  /> */}
+  <img 
+                        src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar} 
+                        alt={`${comment.author.userName}'s avatar`} 
+                        style={styles.userAvatar}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = defaultAvatar;
+                        }}
+                    />
+  
+  <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
+  <p>Likes: {comment.likes}</p>
+  
+  <p>Published: {comment.datePublication}</p>
+</div>
         ))}
 
         {/* Форма для добавления нового комментария */}
@@ -252,6 +298,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "8px",
     backgroundColor: "#f1f1f1",
     borderRadius: "5px",
+  },
+  userAvatar:{
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginLeft: "10px",
+    marginBottom: "5px",
   },
 };
 
