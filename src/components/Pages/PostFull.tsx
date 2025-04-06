@@ -8,7 +8,7 @@ interface Comment {
   _id: number;
   author: {
     avatar?: string | File;
-    userName: string; 
+    userName: string;
   }
   text: string;
   datePublication: string;
@@ -64,7 +64,7 @@ const App: React.FC = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newComment) return;
-    console.log(userState._id,"userState._id");
+    console.log(userState._id, "userState._id");
 
     try {
       const response = await axios.post(
@@ -80,16 +80,16 @@ const App: React.FC = () => {
       setPost((prevPost) =>
         prevPost
           ? {
-              ...prevPost,
-              comments: [
-                ...prevPost.comments,
-                {
-                  ...response.data,
-                  likes: response.data.likes || 0,
-                  datePublication: response.data.datePublication || new Date().toISOString(),
-                },
-              ],
-            }
+            ...prevPost,
+            comments: [
+              ...prevPost.comments,
+              {
+                ...response.data,
+                likes: response.data.likes || 0,
+                datePublication: response.data.datePublication || new Date().toISOString(),
+              },
+            ],
+          }
           : null
       );
       setNewComment(""); // Очистка поля ввода
@@ -117,12 +117,30 @@ const App: React.FC = () => {
   // Лайк-функция
   const handleLikeClick = async () => {
     try {
-      await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
+      console.log(userState._id,"user");
+      const response = await axios.post(
+        `http://localhost:5000/api/post/${_id}/likePost`,{
+          idUser: userState._id,
+        }
+      );
+      setLikeCount(response.data);
+      // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
       setLikeCount((prev) => prev + 1);
     } catch (err) {
       console.error("Ошибка при добавлении лайка", err);
     }
   };
+  // const handleLike = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:5000/api/post/${_id}/like`
+  //     );
+  //     // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
+  //     setLikeCount((prev) => prev + 1);
+  //   } catch (err) {
+  //     console.error("Ошибка при добавлении лайка", err);
+  //   }
+  // };
 
   if (loading) {
     return <div>Загрузка поста...</div>;
@@ -165,6 +183,9 @@ const App: React.FC = () => {
         <h1 style={styles.title}>{post.title}</h1>
         <p style={styles.description}>{post.description}</p>
         <p style={styles.date}>Опубликовано: {post.datePublication}</p>
+        <button onClick={handleLikeClick} style={styles.likeButton}>
+          {likeCount} 👍
+        </button> 
         <p style={styles.likes}>👍 {post.likesCount} лайков</p>
 
         <div style={styles.tagsContainer}>
@@ -176,45 +197,28 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* <div style={styles.commentsContainer}>
-        <h3>Комментарии ({post.comments.length}):</h3>
-        {post.comments.map((comment) => (
-          <div key={comment.id} style={styles.comment}>
-            <strong>{comment.author}</strong>: <span>{comment.text}</span>
-          </div>
-        ))}
-      </div> */}
+{/* Комментарии */}
       <div style={styles.commentsContainer}>
         <h3>Комментарии ({post.comments.length}):</h3>
         {post.comments.map((comment) => (
-          // <div key={comment._id} style={styles.comment}>
-          //   <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
-          // </div>
+
           <div key={comment._id} style={styles.comment}>
-  {/* <img
-    src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar}
-    alt={`${comment.author.userName}'s avatar`}
-    className="user-avatar"
-    onError={(e) => {
-      const target = e.target as HTMLImageElement;
-      target.src = defaultAvatar;
-    }}
-  /> */}
-  <img 
-                        src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar} 
-                        alt={`${comment.author.userName}'s avatar`} 
-                        style={styles.userAvatar}
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = defaultAvatar;
-                        }}
-                    />
-  
-  <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
-  <p>Likes: {comment.likes}</p>
-  
-  <p>Published: {comment.datePublication}</p>
-</div>
+
+            <img
+              src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar}
+              alt={`${comment.author.userName}'s avatar`}
+              style={styles.userAvatar}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = defaultAvatar;
+              }}
+            />
+
+            <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
+            <p>Likes: {comment.likes}</p>
+
+            <p>Published: {comment.datePublication}</p>
+          </div>
         ))}
 
         {/* Форма для добавления нового комментария */}
@@ -299,9 +303,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: "#f1f1f1",
     borderRadius: "5px",
   },
-  userAvatar:{
-    width: "30px",
-    height: "30px",
+  userAvatar: {
+    width: "50px",
+    height: "50px",
     borderRadius: "50%",
     objectFit: "cover",
     marginLeft: "10px",
