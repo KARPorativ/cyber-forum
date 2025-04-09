@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from "./Post/Post";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import defaultAvatar from "../../foto/Никита.jpg"
 
 interface Comment {
   _id: number;
@@ -32,7 +33,7 @@ interface PostProps {
 }
 
 const App: React.FC = () => {
-  const defaultAvatar = 'src/foto/Никита.jpg';
+  // const defaultAvatar = 'src/foto/Никита.jpg';
   // Получаем _id из URL
   const userState = useAppSelector(state => state.user);
   const { _id } = useParams<{ _id: string }>();
@@ -58,6 +59,13 @@ const App: React.FC = () => {
       setError(err.message || "Ошибка при загрузке поста");
     } finally {
       setLoading(false);
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/post/${_id}/getLikePost`
+      );
+      setLikeCount(response.data);
+    } catch (err) {
     }
   };
 
@@ -125,7 +133,7 @@ const App: React.FC = () => {
       );
       setLikeCount(response.data);
       // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
-      setLikeCount((prev) => prev + 1);
+      // setLikeCount((prev) => prev + 1);
     } catch (err) {
       console.error("Ошибка при добавлении лайка", err);
     }
@@ -183,10 +191,14 @@ const App: React.FC = () => {
         <h1 style={styles.title}>{post.title}</h1>
         <p style={styles.description}>{post.description}</p>
         <p style={styles.date}>Опубликовано: {post.datePublication}</p>
+        {/* <p style={styles.likes}> Лайков {post.likesCount}</p>
         <button onClick={handleLikeClick} style={styles.likeButton}>
-          {likeCount} 👍
-        </button> 
-        <p style={styles.likes}>👍 {post.likesCount} лайков</p>
+           👍 
+        </button>  */}
+        <div style={styles.container}>
+  <p style={styles.likes}>Лайков {likeCount}</p>
+  <button onClick={handleLikeClick} style={styles.likeButton}>👍</button>
+</div>
 
         <div style={styles.tagsContainer}>
           {post.tags.map((tag, index) => (
@@ -281,8 +293,10 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   likes: {
     fontWeight: "bold",
-    marginBottom: "8px",
+    marginBottom: "0", // Убираем отступ снизу у <p>, так как flex иногда сохраняет дефолтные отступы
+    marginRight: "10px", // Расстояние между текстом и кнопкой
   },
+
   tagsContainer: {
     display: "flex",
     flexWrap: "wrap",
@@ -310,6 +324,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     objectFit: "cover",
     marginLeft: "10px",
     marginBottom: "5px",
+  },
+  likeButton:{
+    width : "40px",
+    borderRadius: "50%",
+    // marginLeft: "10px",
+  },
+  container: {
+    display: "flex", // Размещаем элементы в строку
+    alignItems: "center", // Центрируем элементы по вертикали
   },
 };
 

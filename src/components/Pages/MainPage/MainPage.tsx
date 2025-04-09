@@ -53,32 +53,6 @@ export default function MainPage  (props: Props) {
     fetchPosts();
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   selectOption(); 
-    
-  // }, [])
-  
-
-  // const selectOption = () => {
-  //   try {
-  //     axios.get("http://localhost:5000/api/getPost", {
-  //       // params: { select }
-  //     }).then(res => {
-  //       setPosts(res.data)
-  //       // console.log(res.data)
-  //     })
-  //     // console.log('data--------------------------------------------------------------------', 'lfdedkfe')
-  //     // setSmens()
-
-  //   } catch (error) {
-  //     console.log("error", error)
-  //   }
-  //   // if(data){
-  //   //   nav('/main');
-  //   // }
-  //   // dispatch(authorizationUser(data))
-
-  // }
   
   return (
     <div>
