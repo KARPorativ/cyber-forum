@@ -125,11 +125,27 @@ const App: React.FC = () => {
   // Лайк-функция
   const handleLikeClick = async () => {
     try {
-      console.log(userState._id,"user");
+      console.log(userState._id, "user");
       const response = await axios.post(
-        `http://localhost:5000/api/post/${_id}/likePost`,{
-          idUser: userState._id,
-        }
+        `http://localhost:5000/api/post/${_id}/likePost`, {
+        idUser: userState._id,
+      }
+      );
+      setLikeCount(response.data);
+      // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
+      // setLikeCount((prev) => prev + 1);
+    } catch (err) {
+      console.error("Ошибка при добавлении лайка", err);
+    }
+  };
+
+  const handleLikeCommentClick = async () => {
+    try {
+      console.log(userState._id, "user");
+      const response = await axios.post(
+        `http://localhost:5000/api/post/${_id}/likeComment`, {
+        idUser: userState._id,
+      }
       );
       setLikeCount(response.data);
       // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
@@ -196,9 +212,9 @@ const App: React.FC = () => {
            👍 
         </button>  */}
         <div style={styles.container}>
-  <p style={styles.likes}>Лайков {likeCount}</p>
-  <button onClick={handleLikeClick} style={styles.likeButton}>👍</button>
-</div>
+          <p style={styles.likes}>Лайков {likeCount}</p>
+          <button onClick={handleLikeClick} style={styles.likeButton}>👍</button>
+        </div>
 
         <div style={styles.tagsContainer}>
           {post.tags.map((tag, index) => (
@@ -209,7 +225,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-{/* Комментарии */}
+      {/* Комментарии */}
       <div style={styles.commentsContainer}>
         <h3>Комментарии ({post.comments.length}):</h3>
         {post.comments.map((comment) => (
@@ -227,7 +243,11 @@ const App: React.FC = () => {
             />
 
             <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
-            <p>Likes: {comment.likes}</p>
+            {/* <p>Likes: {comment.likes}</p> */}
+            <div style={styles.container}>
+              <p style={styles.likes}>Лайков {likeCount}</p>comment._id
+              <button onClick={handleLikeCommentClick} style={styles.likeButton}>👍</button>
+            </div>
 
             <p>Published: {comment.datePublication}</p>
           </div>
@@ -325,8 +345,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginLeft: "10px",
     marginBottom: "5px",
   },
-  likeButton:{
-    width : "40px",
+  likeButton: {
+    width: "40px",
     borderRadius: "50%",
     // marginLeft: "10px",
   },

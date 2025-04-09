@@ -81,17 +81,17 @@ export default function Sorting() {
           </label>
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label>
+          {/* <label>
             Показывать закрытые посты:
             <input 
               type="checkbox" 
               checked={showClosed} 
               onChange={(e) => setShowClosed(e.target.checked)} 
             />
-          </label>
+          </label> */}
         </div>
         
-          <button>dfgg</button>
+          
       </aside>
     </div>
   );
