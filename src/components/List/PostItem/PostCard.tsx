@@ -11,7 +11,7 @@ const PostCard: React.FC<PostProps> =  ({post}) => {
     console.log('post', post)
 
     return (
-        <Link to={`/post/${post._id}`}>
+        <Link to={`/post/${post._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div style={styles.card}>
             <div style={styles.header}>
                 <img src='src/foto/Никита.jpg' alt={post.userName} style={styles.userImage} />

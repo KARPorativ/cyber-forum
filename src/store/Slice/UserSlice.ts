@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { IPost } from '../../types/Post';
 // Определяем интерфейс для состояния пользователя
 interface UserState {
     _id: string;
@@ -14,6 +15,7 @@ interface UserState {
     city: string;
     about: string;
     avatar: string;
+    posts: IPost[];
     loading: boolean;
     error: string | null;
 }
@@ -31,6 +33,7 @@ const initialState: UserState = {
     about: '',
     avatar: '',
     tags: [],
+    posts: [],
     loading: false,
     error: null,
 };
@@ -40,7 +43,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserState>) => {
-    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar,tags } = action.payload;
+    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar ,tags, posts } = action.payload;
             state._id = _id;
             state.userName = userName;
             state.email = email;
@@ -52,7 +55,12 @@ const userSlice = createSlice({
             state.city = city;
             state.about = about;
             state.tags = tags;
-    state.avatar = avatar;
+            state.avatar = avatar;
+            if (state.posts.length === 0) {
+                state.posts = posts; // Immer позволяет "мутировать" состояние
+              }
+            // state.posts.length == 0 && state.posts = posts;
+    // return action.payload;
 },
         resetUser: (state) => {
             state._id = '';
