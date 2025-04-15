@@ -13,6 +13,7 @@ interface Comment {
   }
   text: string;
   datePublication: string;
+  likesCount: number;
   likes: number;
 }
 
@@ -42,6 +43,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [newComment, setNewComment] = useState<string>("");
+  const [currentComment, setCurrentComment] = useState(null);
 
   // Функция для загрузки поста с сервера
   const fetchPost = async () => {
@@ -139,15 +141,19 @@ const App: React.FC = () => {
     }
   };
 
-  const handleLikeCommentClick = async () => {
+  const handleLikeCommentClick = async (commentId: string | number) => {
     try {
+      console.log("Executing handleLikeCommentClick...");
+        console.log("Comment ID:", commentId);
       console.log(userState._id, "user");
+      
       const response = await axios.post(
         `http://localhost:5000/api/post/${_id}/likeComment`, {
         idUser: userState._id,
+        idComment: commentId,
       }
       );
-      setLikeCount(response.data);
+      // setLikeCount(response.data);
       // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
       // setLikeCount((prev) => prev + 1);
     } catch (err) {
@@ -245,8 +251,8 @@ const App: React.FC = () => {
             <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
             {/* <p>Likes: {comment.likes}</p> */}
             <div style={styles.container}>
-              <p style={styles.likes}>Лайков {likeCount}</p>comment._id
-              <button onClick={handleLikeCommentClick} style={styles.likeButton}>👍</button>
+              <p style={styles.likes}>Лайков {likeCount}</p>{comment.likesCount}
+              <button onClick={() => handleLikeCommentClick(comment._id)} style={styles.likeButton}>👍</button>
             </div>
 
             <p>Published: {comment.datePublication}</p>
