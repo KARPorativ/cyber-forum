@@ -147,6 +147,7 @@ const handleRemoveTag = (tagToRemove: string) => {
                 }
             );
             if (response.status === 200) {
+                console.log('cazan', response.data)
             // Обновляем Redux store с новыми данными пользователя
                 dispatch(setUser({
                     ...response.data,

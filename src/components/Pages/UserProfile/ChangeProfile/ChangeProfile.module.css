@@ -1,0 +1,123 @@
+.userProfile {
+    width: 50%;
+    min-height: 80vh; /* Увеличиваем минимальную высоту */
+    padding: 30px; /* Увеличиваем отступы */
+    background-color: #fff;
+    border-radius: 12px; /* Увеличиваем скругление углов */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Усиливаем тень */
+}
+
+.userProfileHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Увеличиваем промежутки */
+    margin-bottom: 40px;
+}
+
+.avatarSection {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Увеличиваем промежуток между аватаром и текстом */
+}
+
+.userAvatar {
+    width: 150px; /* Увеличиваем размер аватара */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #f0f0f0; /* Увеличиваем толщину рамки */
+}
+
+.userMainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Увеличиваем промежутки */
+}
+
+.username {
+    margin: 0;
+    font-size: 28px; /* Увеличиваем размер шрифта */
+    color: #333;
+}
+
+.quote {
+    margin: 0;
+    font-style: italic;
+    font-size: 18px; /* Увеличиваем размер шрифта */
+    color: #666;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Увеличиваем промежутки */
+    padding: 25px; /* Увеличиваем отступы */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    font-size: 18px; /* Увеличиваем размер шрифта */
+}
+
+.userDetails p {
+    margin: 8px 0; /* Увеличиваем отступы */
+    line-height: 1.6; /* Увеличиваем межстрочный интервал */
+}
+
+.techTags {
+    margin-top: 15px;
+}
+
+.tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Увеличиваем промежутки между тегами */
+    margin-top: 12px;
+}
+
+.techTag {
+    padding: 6px 14px; /* Увеличиваем отступы */
+    background-color: #e0e0e0;
+    border-radius: 18px; /* Увеличиваем скругление */
+    font-size: 16px; /* Увеличиваем размер шрифта */
+    color: #333;
+}
+
+.editProfileLink {
+    display: block;
+    text-align: center;
+    margin-top: 30px; /* Увеличиваем отступ */
+}
+
+.editProfileButton {
+    padding: 12px 24px; /* Увеличиваем размер кнопки */
+    background-color: #4a76a8;
+    color: white;
+    border: none;
+    border-radius: 6px; /* Увеличиваем скругление */
+    cursor: pointer;
+    font-size: 18px; /* Увеличиваем размер шрифта */
+    transition: all 0.3s;
+}
+
+.editProfileButton:hover {
+    background-color: #3a5f8a;
+    transform: scale(1.02); /* Добавляем небольшое увеличение при наведении */
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .userProfile {
+        width: 90%;
+        min-height: auto;
+        padding: 20px;
+    }
+    
+    .avatarSection {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .userAvatar {
+        width: 120px;
+        height: 120px;
+    }
+}
