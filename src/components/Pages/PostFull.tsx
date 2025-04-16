@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Post from "./Post/Post";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import defaultAvatar from "../../foto/Никита.jpg"
+import CommentItem from "./CommentItem/CommentItem";
 
 interface Comment {
   _id: number;
@@ -153,7 +154,7 @@ const App: React.FC = () => {
         idComment: commentId,
       }
       );
-      // setLikeCount(response.data);
+      setLikeCount(response.data);
       // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
       // setLikeCount((prev) => prev + 1);
     } catch (err) {
@@ -201,6 +202,7 @@ const App: React.FC = () => {
           src={post.author.avatar ? `http://localhost:5000/${post.author.avatar}` : defaultAvatar}
           alt={`${post.author.userName}'s avatar`}
           className="user-avatar"
+          style={styles.postAvatar}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = defaultAvatar;
@@ -236,27 +238,7 @@ const App: React.FC = () => {
         <h3>Комментарии ({post.comments.length}):</h3>
         {post.comments.map((comment) => (
 
-          <div key={comment._id} style={styles.comment}>
-
-            <img
-              src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar}
-              alt={`${comment.author.userName}'s avatar`}
-              style={styles.userAvatar}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = defaultAvatar;
-              }}
-            />
-
-            <strong>{comment.author.userName}</strong>: <span>{comment.text}</span>
-            {/* <p>Likes: {comment.likes}</p> */}
-            <div style={styles.container}>
-              <p style={styles.likes}>Лайков {likeCount}</p>{comment.likesCount}
-              <button onClick={() => handleLikeCommentClick(comment._id)} style={styles.likeButton}>👍</button>
-            </div>
-
-            <p>Published: {comment.datePublication}</p>
-          </div>
+          <CommentItem comment={comment} postId={_id} user={userState}/>
         ))}
 
         {/* Форма для добавления нового комментария */}
@@ -288,6 +270,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     alignItems: "center",
     marginBottom: "16px",
+  },
+  postAvatar:{
+    width: "200px"
   },
   avatar: {
     width: "50px",

@@ -15,6 +15,7 @@ export interface Tag {
   }
 
   export interface IUser {
+    _id: string;
     avatar?: string;
     userName: string;
     password?: string;
@@ -28,4 +29,22 @@ export interface Tag {
     email?: string;
     tags: string[];
     posts: any;
+    likeCount: number;
+  }
+
+  export interface IComment {
+    _id: string;
+    author: IUser;
+    post: IPost;
+    image?: string;
+    text: string;
+    datePublication: string;
+    likesCount: number;
+    likeComments: ILikePost[];
+  }
+  
+  export interface ILikePost {
+    _id?: string;
+    user: IPost;
+    post: IPost;
   }
