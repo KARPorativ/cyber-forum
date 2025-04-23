@@ -9,9 +9,9 @@ export default function Layout (props: Props) {
   // useIsAuth();
   
   return (
-    <div>
+    <>
       <Header></Header>
       <Outlet/>
-    </div>
+    </>
   )
 }

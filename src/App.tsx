@@ -56,8 +56,6 @@ function App() {
 
 
   return (
-    <div>
-
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
@@ -72,8 +70,6 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Routes>
-
-    </div>
   )
 }
 

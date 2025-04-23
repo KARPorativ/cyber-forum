@@ -1,11 +1,14 @@
 export interface IPost {
     _id: string;
+    author: IUser;
     userImage: string;
     userName: string;
+    datePublication: string;
     title: string;
     description: string;
     tags: string[];
-    commentsCount: number;
+    comments: IComment[];
+    likesCount: number;
     rating: number;
 }
 

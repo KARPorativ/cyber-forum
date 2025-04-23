@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import List from '../../List/List'
-import PostItem from '../../List/PostItem/PostItem'
 import Sorting from '../../sorting/Sorting'
-import Test from '../../test/Test'
 import axios from 'axios'
-import { useAppSelector } from '../../../hooks/reduxHooks'
 import Stack from '../../stack/Stack'
 import PostCard from '../../List/PostItem/PostCard'
 import { useSearchParams } from 'react-router-dom'
+import classes from './MainPage.module.css'
 
-type Props = {}
 
-export default function MainPage  (props: Props) {
+export default function MainPage  () {
 
   const [posts, setPosts] = useState([])
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   const [searchParams] = useSearchParams();
 
@@ -40,6 +36,7 @@ export default function MainPage  (props: Props) {
         params: params
       });
 
+      console.log('Все посты', response.data);
       setPosts(response.data);
     } catch (error) {
       console.error('Ошибка при загрузке постов:', error);
@@ -48,15 +45,13 @@ export default function MainPage  (props: Props) {
     }
   };
 
-  // Можно вызывать автоматически при изменении параметров
   useEffect(() => {
     fetchPosts();
   }, [searchParams]);
 
   
   return (
-    <div>
-      <div className='main'>
+      <div className={classes.main}>
         <Sorting></Sorting>
       {/* <List items = {posts} renderItem={(post) =>
         <PostItem post ={post}></PostItem>
@@ -66,6 +61,5 @@ export default function MainPage  (props: Props) {
       }></List>
       <Stack></Stack>
       </div>
-    </div>
   )
 }

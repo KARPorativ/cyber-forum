@@ -13,7 +13,7 @@ const List = <T,>({ items, renderItem, condition, inThisCase, className = '' }: 
     if (condition !== undefined && !condition) {
         return inThisCase ? <>{inThisCase}</> : null;
     }
-    console.log('items', items)
+    
     return (
         <div className={`${classes.list} ${className}`}>
             {items.length ? items.map((item, index) => renderItem(item, index)) 

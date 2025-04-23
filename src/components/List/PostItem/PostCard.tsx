@@ -1,14 +1,13 @@
 import React from 'react';
 import { IPost } from '../../../types/Post';
 import { Link } from 'react-router-dom';
+import { convertDate } from '../../../utils/convertDate';
 
 interface PostProps {
     post: IPost;
 }
 
 const PostCard: React.FC<PostProps> =  ({post}) => {
-    // console.log('post', post)
-    console.log('post', post)
 
     return (
         <Link to={`/post/${post._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -16,8 +15,9 @@ const PostCard: React.FC<PostProps> =  ({post}) => {
             <div style={styles.header}>
                 <img src='src/foto/Никита.jpg' alt={post.userName} style={styles.userImage} />
                 <div>
-                    <h2 style={styles.userName}>userName</h2>
-                    <span >{new Date().toLocaleDateString()}</span>
+                    <h2 style={styles.userName}>{post.author.userName || "userName"}</h2>
+                    {/* <span >{new Date().toLocaleDateString()}</span> */}
+                    <span >{convertDate(post.datePublication)}</span>
                 </div>
             </div>
             <h3 style={styles.title}>{post.title || 'Нет заголовка'}</h3>
@@ -30,8 +30,8 @@ const PostCard: React.FC<PostProps> =  ({post}) => {
                     ))} */}
             </div>
             <div style={styles.footer}>
-                <span style={styles.comments}>Комментарии: commentsCount</span>
-                <span style={styles.rating}>Оценка: rating</span>
+                <span style={styles.comments}>Комментарии: {post.comments.length}</span>
+                <span style={styles.rating}>Популятность: {post.likesCount}</span>
             </div>
         </div>
                     </Link>
@@ -43,7 +43,7 @@ const styles = {
         border: '1px solid #e0e0e0',
         borderRadius: '8px',
         padding: '16px',
-        margin: '16px',
+        marginInline: '16px',
         backgroundColor: '#fff',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     },

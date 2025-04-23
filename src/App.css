@@ -1,4 +1,4 @@
-.main{
-    display: grid;
-    grid-template-columns: 2fr 6fr 2fr;
+html, body, #root  {
+    height: calc(100vh - 65px);
+    /* height:100vh; */
 }
