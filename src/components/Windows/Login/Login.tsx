@@ -47,7 +47,8 @@ const Login: React.FC = () => {
         console.log('Login:', { userName: formData.userName, password: formData.password });
     };
     return (
-        <div className={classes.loginContainer}>
+        <div className={classes.loginWrapper}>
+            <div className={classes.loginContainer}>
             <h2>Авторизация</h2>
             <form onSubmit={handleSubmit}>
                 <div className={classes.formGroup}>
@@ -76,6 +77,7 @@ const Login: React.FC = () => {
                 {formData.message && <p className={classes.errorMessage}>{formData.message}</p>}
                 <p className={classes.textLink}>Еще нет аккаунта? <a href="/register">Зарегистрируйтесь здесь</a></p>
             </form>
+            </div>
         </div>
     );
 };

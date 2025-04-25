@@ -1,0 +1,35 @@
+.wrapper {
+    width: 33.33%;
+    min-width: 300px;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #495057;
+  }
+  
+  .form-control-sm, .form-select-sm {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .form-switch {
+    padding-left: 2.5em;
+  }
+  
+  .form-switch .form-check-input {
+    width: 2em;
+    margin-left: -2.5em;
+    height: 1.2em;
+  }

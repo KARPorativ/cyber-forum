@@ -52,14 +52,11 @@ export default function MainPage  () {
   
   return (
       <div className={classes.main}>
-        <Sorting></Sorting>
-      {/* <List items = {posts} renderItem={(post) =>
-        <PostItem post ={post}></PostItem>
-      }></List> */}
+        <Sorting/>
       <List items = {posts} renderItem={(post) =>
         <PostCard post ={post}></PostCard>
       }></List>
-      <Stack></Stack>
+      <Stack/>
       </div>
   )
 }

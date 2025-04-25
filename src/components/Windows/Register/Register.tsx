@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Register.module.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Register: React.FC = () => {
@@ -60,6 +60,7 @@ const Register: React.FC = () => {
     };
 
     return (
+        <div className={styles.registerWrapper}>
         <div className={styles.container}>
             <h1>Регистрация</h1>
             {error && <div className={styles.error}>{error}</div>}
@@ -95,7 +96,9 @@ const Register: React.FC = () => {
                     />
                 </div>
                 <button type="submit" className={styles.button}>Зарегистрироваться</button>
+                <span className={styles.login}>Уже есть аккаунт? &nbsp;<Link to="/login" > Войти</Link></span>
             </form>
+        </div>
         </div>
     );
 };

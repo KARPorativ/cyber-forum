@@ -108,22 +108,10 @@ const App: React.FC = () => {
       console.error("Ошибка при добавлении комментария", err);
     }
   };
-  // Загружаем пост при монтировании компонента
-  // useEffect(() => {
-  //   if (_id) {
-  //     console.log("uw");
-  //     fetchPost();
-  //   }
-  // }, [_id]);
+
   useEffect(() => {
-
-
     fetchPost();
-
   }, []);
-
-
-
 
   // Лайк-функция
   const handleLikeClick = async () => {
@@ -135,8 +123,6 @@ const App: React.FC = () => {
       }
       );
       setLikeCount(response.data);
-      // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
-      // setLikeCount((prev) => prev + 1);
     } catch (err) {
       console.error("Ошибка при добавлении лайка", err);
     }
@@ -155,23 +141,10 @@ const App: React.FC = () => {
       }
       );
       setLikeCount(response.data);
-      // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
-      // setLikeCount((prev) => prev + 1);
     } catch (err) {
       console.error("Ошибка при добавлении лайка", err);
     }
   };
-  // const handleLike = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:5000/api/post/${_id}/like`
-  //     );
-  //     // await axios.post(`/api/post/${_id}/like`); // Запрос на увеличение лайков
-  //     setLikeCount((prev) => prev + 1);
-  //   } catch (err) {
-  //     console.error("Ошибка при добавлении лайка", err);
-  //   }
-  // };
 
   if (loading) {
     return <div>Загрузка поста...</div>;
@@ -189,15 +162,6 @@ const App: React.FC = () => {
 
     <div style={styles.postContainer}>
       <div style={styles.header}>
-        {/* <img
-        src={
-          typeof post.author.avatar === "string"
-            ? post.author.avatar
-            : post.author.avatar ? URL.createObjectURL(post.author.avatar) : "src/foto/Никита.jpg" // Заглушка для аватара
-        }
-        alt={`${post.author.userName}'s avatar`}
-        style={styles.avatar}
-      /> */}
         <img
           src={post.author.avatar ? `http://localhost:5000/${post.author.avatar}` : defaultAvatar}
           alt={`${post.author.userName}'s avatar`}
@@ -272,7 +236,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: "16px",
   },
   postAvatar:{
-    width: "200px"
+    width: "50px"
   },
   avatar: {
     width: "50px",

@@ -1,5 +1,14 @@
+
+.registerWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
 .container {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -39,7 +48,7 @@ h1 {
     padding: 10px;
     font-size: 16px;
     color: #fff;
-    background-color: #28a745;
+    background-color: #007bff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -49,8 +58,14 @@ h1 {
     background-color: #218838;
 }
 
+.login{
+    display: flex;
+    justify-content: center;
+}
+
 .error {
     color: red;
     text-align: center;
     margin-bottom: 15px;
 }
+
