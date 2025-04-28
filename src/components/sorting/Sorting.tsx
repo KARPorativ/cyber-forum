@@ -24,9 +24,9 @@ export default function Sorting() {
   }, [title, author, stack, sort, showClosed, setSearchParams]);
 
   return (
-    <div className={`${classes.wrapper} card shadow-sm`}>
+    <div className={`${classes.wrapper} card shadow-sm`} style={{ backgroundColor: '#f7f5fa'}}>
       <div className="card-body">
-        <h5 className="card-title mb-4">Фильтры</h5>
+        <h5 className="card-title mb-4 text-center">Фильтры</h5>
         
         <div className="mb-3">
           <label className="form-label">Поиск по названию</label>

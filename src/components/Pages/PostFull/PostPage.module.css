@@ -1,0 +1,114 @@
+.postContainer {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .postAvatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .userName {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .body {
+    margin-bottom: 16px;
+  }
+  
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .description {
+    font-size: 16px;
+    margin-bottom: 8px;
+
+  }
+
+  .description img {
+    max-height: 200px;
+    display: block;
+  }
+  
+  .date {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .likes {
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  
+  .tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag {
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+  
+  .commentsContainer {
+    margin-top: 16px;
+  }
+  
+  .comment {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  /* CommentItemAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  } */
+  
+  .likeButton {
+    width: 40px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+  }

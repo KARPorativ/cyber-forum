@@ -86,12 +86,12 @@ const PostCreator: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const plainTextContent = new DOMParser().parseFromString(content, 'text/html').body.textContent || "";
-
+        // const plainTextContent = new DOMParser().parseFromString(content, 'text/html').body.textContent || "";
+        console.log('content', content);
         const formData = new FormData();
         formData.append('author', _id);
         formData.append('title', title);
-        formData.append('content', plainTextContent);
+        formData.append('content', content);
         if (image) {
             formData.append('image', image);
         }

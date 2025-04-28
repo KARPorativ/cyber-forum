@@ -1,0 +1,86 @@
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-inline: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 100%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.userImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.userName {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.description {
+    font-size: 1em;
+    color: #333;
+    max-width: 800px;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.description img {
+    visibility: collapse;
+    height: 1px;
+}
+
+.tags {
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.noTags {
+    font-style: italic;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.comments {
+    margin-right: 10px;
+}
+
+.rating {
+    font-weight: bold;
+}

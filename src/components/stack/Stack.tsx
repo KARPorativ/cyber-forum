@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import classes from './Stack.module.css';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Tag } from '../../types/Post';
+import classes from './Stack.module.css';
 
-type Props = {};
-
-export default function Stack({ }: Props) {
+export default function Stack() {
   const [tags, setTags] = useState<Tag[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   
-  // Получаем теги из URL при первом рендере
   const initialTags = searchParams.get('tags')?.split(',') || [];
   const [selectedTags, setSelectedTags] = useState<string[]>(initialTags);
 
-  // Загрузка тегов с сервера
   useEffect(() => {
     const fetchTags = async () => {
       try {
@@ -28,7 +24,6 @@ export default function Stack({ }: Props) {
     fetchTags();
   }, []);
 
-  // Обновление URL при изменении selectedTags
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
     if (selectedTags.length > 0) {
@@ -48,20 +43,23 @@ export default function Stack({ }: Props) {
   };
 
   return (
-    <div className={classes.wrapper}>
-      <h4>Теги</h4>
-      <div className={classes.tagsContainer}>
-        {tags.map(({ tag, tagCount }) => (
-          <Button
-            key={tag}
-            variant={selectedTags.includes(tag) ? 'primary' : 'outline-primary'}
-            onClick={() => handleTagClick(tag)}
-            className={classes.tagButton}
-          >
-            {tag} ({tagCount})
-          </Button>
-        ))}
-      </div>
-    </div>
+    <Card className={`${classes.wrapper} shadow`}>
+      <Card.Body>
+        <Card.Title className="text-center mb-4">Теги</Card.Title>
+        <div className={classes.tagsContainer}>
+          {tags.map(({ tag, tagCount }) => (
+            <Button
+              key={tag}
+              variant={selectedTags.includes(tag) ? 'primary' : 'outline-primary'}
+              onClick={() => handleTagClick(tag)}
+              className={classes.tagButton}
+              size="sm"
+            >
+              {tag} <span className="badge bg-light text-dark ms-1">{tagCount}</span>
+            </Button>
+          ))}
+        </div>
+      </Card.Body>
+    </Card>
   );
 }

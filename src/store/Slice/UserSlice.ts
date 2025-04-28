@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { IPost } from '../../types/Post';
 // Определяем интерфейс для состояния пользователя
 interface UserState {
@@ -16,6 +15,7 @@ interface UserState {
     about: string;
     avatar: string;
     posts: IPost[];
+    isAdmin: boolean;
     loading: boolean;
     error: string | null;
 }
@@ -34,6 +34,7 @@ const initialState: UserState = {
     avatar: '',
     tags: [],
     posts: [],
+    isAdmin: false,
     loading: false,
     error: null,
 };

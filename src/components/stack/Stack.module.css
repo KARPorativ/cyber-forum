@@ -1,11 +1,36 @@
-.wrapper{
-    border: 1px solid black;
-    margin-left: 5px;
-    padding: 5px;
-}
-
-.tagsContainer{
+.wrapper {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .wrapper:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tagsContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
-}
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  
+  .tagButton {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tagButton:hover {
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .tagsContainer {
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+  }

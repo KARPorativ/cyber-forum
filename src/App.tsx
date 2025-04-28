@@ -14,11 +14,11 @@ import Question from './components/question/Question'
 import Login from './components/Windows/Login/Login'
 import Register from './components/Windows/Register/Register'
 import PostCreator from './components/Pages/PostCreator/PostCreator'
-import P from './components/Pages/PostFull'
+import P from './components/Pages/PostFull/PostFull'
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProfileEdit from './components/Pages/ProfileEdit/ProfileEdit'
 import QuestionList from './components/QuestionList/QuestionList'
-import PostFull from './components/Pages/PostFull'
+import PostFull from './components/Pages/PostFull/PostFull'
 
 function App() {
 

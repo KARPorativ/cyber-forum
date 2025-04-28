@@ -18,6 +18,7 @@ interface User {
     email?: string;
     tags?: string[];
 }
+
 const ProfileEdit: React.FC<{ }> = ({ }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();

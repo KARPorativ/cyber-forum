@@ -49,3 +49,34 @@ button {
   font-weight: bold; /* Bold button text */
   border-radius: 5px; /* Slightly rounded button */
 }
+
+.listik{
+  flex-direction: "row";
+  background-color: "red",
+}
+
+.tag {
+  background-color: #E9ECEF;
+  padding: 2px 10px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 
+    0 2px 0 #DEE2E6, /* нижняя тень для "глубины" */
+    0 3px 5px rgba(0,0,0,0.1); /* мягкая тень */
+  transition: all 0.2s ease;
+  transform-style: preserve-3d;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 0 #DEE2E6,
+    0 5px 10px rgba(0,0,0,0.15);
+}
+
+.tag:active {
+  transform: translateY(1px);
+  box-shadow: 
+    0 1px 0 #DEE2E6,
+    0 2px 3px rgba(0,0,0,0.1);
+}

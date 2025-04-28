@@ -6,10 +6,11 @@ export interface IPost {
     datePublication: string;
     title: string;
     description: string;
-    tags: string[];
+    tags: Tag[];
     comments: IComment[];
     likesCount: number;
     rating: number;
+    isAdmin: boolean;
 }
 
 export interface Tag {
