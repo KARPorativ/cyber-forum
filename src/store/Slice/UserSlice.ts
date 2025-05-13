@@ -44,7 +44,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserState>) => {
-    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar ,tags, posts } = action.payload;
+    const { _id, userName, email, quote, firstName, lastName, middleName, phone, city, about, avatar ,tags, isAdmin, posts } = action.payload;
             state._id = _id;
             state.userName = userName;
             state.email = email;
@@ -57,6 +57,7 @@ const userSlice = createSlice({
             state.about = about;
             state.tags = tags;
             state.avatar = avatar;
+            state.isAdmin = isAdmin;
             if (state.posts.length === 0) {
                 state.posts = posts; // Immer позволяет "мутировать" состояние
               }

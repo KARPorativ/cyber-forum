@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 
 const ChangeProfile = () => {
-    const defaultAvatar = 'src/foto/Никита.jpg';
+    const defaultAvatar = 'src/foto/anonim.jpg';
     const user = useAppSelector(state => state.user);
     
     return (
@@ -22,7 +22,7 @@ const ChangeProfile = () => {
                     />
                     <div className={styles.userMainInfo}>
                         <h2 className={styles.username}>{user.userName}</h2>
-                        <p className={styles.quote}>"{user.quote}"</p>
+                        {/* <p className={styles.quote}>"{user.quote}"</p> */}
                     </div>
                 </div>
             

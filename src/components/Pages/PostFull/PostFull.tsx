@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Post from "../Post/Post";
 import { useAppSelector } from "../../../hooks/reduxHooks";
-import defaultAvatar from "../../../foto/Никита.jpg";
+import defaultAvatar from "../../../foto/anonim.jpg";
 import CommentItem from "../CommentItem/CommentItem";
+import { Trash } from 'react-bootstrap-icons';
 
 // Импортируем CSS Module
 import styles from "./PostPage.module.css";
+import { convertDate } from "../../../utils/convertDate";
+import List from "../../List/List";
+import { IPost } from "../../../types/Post";
+import UserPostItem from "../UserProfile/UserPostItem/UserPostItem";
 
 interface Comment {
   _id: number;
@@ -45,6 +50,9 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [newComment, setNewComment] = useState<string>("");
+  const [simularPosts, setSimularPosts] = useState<IPost[]>([]);
+
+  const navigate = useNavigate();
 
   const fetchPost = async () => {
     setLoading(true);
@@ -58,6 +66,21 @@ const App: React.FC = () => {
     } finally {
       setLoading(false);
     }
+
+    
+    try {
+      console.log('привет')
+      const response = await axios.get(
+        `http://localhost:5000/api/post/${_id}/getSimularPosts`
+      );
+      // console.log('привет2');
+      setSimularPosts(response.data);
+      console.log("Похожие посты: ", response.data);
+    } catch (err) {
+      console.error("Ошибка при загрузке похожих постов:", err);
+    }
+ 
+  
 
     try {
       const response = await axios.get(
@@ -125,8 +148,18 @@ const App: React.FC = () => {
     }
   };
 
+  const deletePost = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/deletePost/${_id}`);
+      navigate("/");
+    } catch (err) {
+      console.error("Ошибка при удалении поста", err);
+    }
+  };
+
   useEffect(() => {
     fetchPost();
+    // getSimularPosts();
   }, []);
 
   if (loading) {
@@ -143,6 +176,7 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.postContainer}>
+      <div className={styles.leftSide}>
       <div className={styles.header}>
         <img
           src={
@@ -158,15 +192,17 @@ const App: React.FC = () => {
           }}
         />
         <h2 className={styles.userName}>{post.author.userName}</h2>
+        {/* <p className={styles.deletePost}>{userState.isAdmin && 'Вы админ'}</p> */}
+        {userState.isAdmin && <Trash className={styles.deletePost} color="red" size={24} onClick={deletePost} />}
       </div>
-      <p>{userState.isAdmin && 'Вы админ'}</p>
+      
       <div className={styles.body}>
         <h1 className={styles.title}>{post.title}</h1>
         <p
           className={styles.description}
           dangerouslySetInnerHTML={{ __html: post.description || "Нет описания" }}
         ></p>
-        <p className={styles.date}>Опубликовано: {post.datePublication}</p>
+        <p className={styles.date}>Опубликовано: {convertDate(post.datePublication)}</p>
         {/* Лайк и счетчик */}
         <div className={styles.container}>
           <p className={styles.likes}>Лайков {likeCount}</p>
@@ -178,7 +214,7 @@ const App: React.FC = () => {
         <div className={styles.tagsContainer}>
           {post.tags.map((tag, index) => (
             <span key={index} className={styles.tag}>
-              #{tag.tag}
+              <span style={{color: "red"}}># </span>{tag.tag}
             </span>
           ))}
         </div>
@@ -210,6 +246,12 @@ const App: React.FC = () => {
             Добавить комментарий
           </button>
         </form>
+      </div>
+      </div>
+      <div className={styles.rightSide}>
+        <h2>Похожие посты</h2>
+        <hr/>
+        <List items={simularPosts} renderItem={(post: IPost) => <UserPostItem key={post._id} post={post} />} />
       </div>
     </div>
   );

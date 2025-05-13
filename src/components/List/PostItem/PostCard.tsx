@@ -5,20 +5,21 @@ import { convertDate } from '../../../utils/convertDate';
 import List from '../List';
 import TagsItem from './TagsItem';
 import classes from './PostCard.module.css';
+import defaultImg from '../../../foto/anime3.gif';
 
 interface PostProps {
     post: IPost;
 }
 
 const PostCard: React.FC<PostProps> = ({ post }) => {
-    console.log("img", post.image);
+    // console.log("img", post.image);
     
     return (
         <Link to={`/post/${post._id}`} className={classes.link}>
             <div className={classes.card}>
                 <div className={classes.header}>
                     <img 
-                        src={post.image} 
+                        src={post.image || defaultImg} 
                         alt={post.userName} 
                         className={classes.userImage} 
                     />

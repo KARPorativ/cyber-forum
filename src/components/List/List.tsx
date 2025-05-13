@@ -23,5 +23,5 @@ const List = <T,>({ items, renderItem, condition, inThisCase, className = '' }: 
         </div>
     );
 };
- 
+
 export default List;

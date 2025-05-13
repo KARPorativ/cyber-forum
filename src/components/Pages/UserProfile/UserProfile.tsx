@@ -4,7 +4,6 @@ import { useAppSelector } from '../../../hooks/reduxHooks';
 import ChangeProfile from './ChangeProfile/ChangeProfile';
 import classes from './UserProfile.module.css';
 import List from '../../List/List';
-import { IPost } from '../../../types/Post';
 import UserPostItem from './UserPostItem/UserPostItem';
 
 const UserProfile = () => {

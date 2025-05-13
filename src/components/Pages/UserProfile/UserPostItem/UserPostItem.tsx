@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Badge, Stack } from 'react-bootstrap';
 import { IPost } from '../../../../types/Post';
 import { Link } from 'react-router-dom';
+import classes from "../UserProfile.module.css";
+import defaultAvatar from '../../../../foto/anonim.jpg';
 
 interface PostListItemProps {
   post: IPost;
@@ -9,15 +11,15 @@ interface PostListItemProps {
 
 const UserPostItem: React.FC<PostListItemProps> = ({ post }) => {
   console.log("post65",  post);
-  return (
+  return ( 
     <Link to={`/post/${post._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-    <Card className="mb-3 w-100" style={{ maxHeight: '200px', overflow: 'hidden' }}>
+    <Card className="mb-3 w-100" style={{ maxHeight: '200px', overflow: 'hidden', borderRadius: '10px' }}>
       <Card.Body className="p-3">
         <div className="d-flex">
           {/* Аватар пользователя */}
           <div className="me-3">
             <img
-              src={post?.author?.avatar ? `http://localhost:5000/${post?.author?.avatar}` : 'https://via.placeholder.com/40'}
+              src={post?.author?.avatar ? `http://localhost:5000/${post?.author?.avatar}` : defaultAvatar}
               alt={post.userName}
               className="rounded-circle"
               width="40"
@@ -44,23 +46,24 @@ const UserPostItem: React.FC<PostListItemProps> = ({ post }) => {
             
             {/* Описание поста */}
             <Card.Text 
-              className="mb-2"
+              className={classes.description}
               style={{ 
                 fontSize: '0.9rem',
                 display: '-webkit-box',
                 WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
+                WebkitBoxOrient: 'vertical', 
                 overflow: 'hidden',
-                textOverflow: 'ellipsis'
+                textOverflow: 'ellipsis',
               }}
+              dangerouslySetInnerHTML={{ __html: post.description || "Нет описания" }}
             >
-              {post.description}
+              {/* {post.description} */}
             </Card.Text>
             
             {/* Теги и количество комментариев */}
             <div className="d-flex justify-content-between align-items-end">
               <Stack direction="horizontal" gap={1} className="flex-wrap">
-                {post?.tags.slice(0, 3).map((tag, index) => (
+                {post.tags.length !== 0 ? post?.tags.slice(0, 3).map((tag, index) => (
                   <Badge 
                     key={index} 
                     bg="light" 
@@ -69,8 +72,9 @@ const UserPostItem: React.FC<PostListItemProps> = ({ post }) => {
                     style={{ maxWidth: '100px' }}
                   >
                     {tag.tag}
-                  </Badge>
-                ))}
+                  </Badge> 
+                )) :
+                "Без тегов"}
                 {post.tags.length > 3 && (
                   <Badge bg="light" text="dark">+{post.tags.length - 3}</Badge>
                 )}

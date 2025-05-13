@@ -4,8 +4,18 @@
     padding: 16px;
     margin: 16px 0;
     background-color: #f9f9f9;
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    background-color: #eee;
   }
-  
+  .leftSide{
+    border-right: 1px solid rgba(128, 128, 128, 0.5);
+    margin-right: 20px;
+    padding-right: 20px;
+  }
+  .rightSide{
+    /* background-color: #dcdcdc; */
+  }
   .header {
     display: flex;
     align-items: center;
@@ -13,24 +23,25 @@
   }
   
   .postAvatar {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     object-fit: cover;
     border-radius: 50%;
     cursor: pointer;
   }
   
   .avatar {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     margin-right: 10px;
   }
   
   .userName {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
     margin: 0;
+    margin-left: 20px;
   }
   
   .body {
@@ -41,6 +52,7 @@
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 8px;
+    text-align: left;
   }
   
   .description {
@@ -111,4 +123,10 @@
   .container {
     display: flex;
     align-items: center;
+  }
+
+
+  .deletePost{
+    margin-left: auto;
+    margin-right: 20px;
   }

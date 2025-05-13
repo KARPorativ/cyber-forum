@@ -4,7 +4,15 @@
     gap:  10px;
     width: 100%;
     padding: 20px;
+    background-color: #dcdcdc;
 }
 .lists{
     width: 50%;
+}
+.description  {
+    margin: 0;
+}
+.description img {
+    visibility: collapse;
+    height: 1px;
 }

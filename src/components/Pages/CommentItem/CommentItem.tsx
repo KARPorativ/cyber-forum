@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { IComment, IUser } from '../../../types/Post';
-import defaultAvatar from "../../../foto/Никита.jpg";
+import defaultAvatar from "../../../foto/anime4.gif";
 import styles from './CommentItem.module.css';
 import { Card, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -69,7 +69,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment, user, postId }) => {
         </div>
 
         <Card.Footer className={`text-muted ${styles.date}`}>
-          Опубликовано: {new Date(comment.datePublication).toLocaleString()}
+          Опубликовано: { new Date(comment.datePublication).toLocaleString()}
         </Card.Footer>
       </Card.Body>
     </Card>

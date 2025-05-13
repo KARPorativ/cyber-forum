@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import defaultImage from '../../foto/Никита.jpg';
+import defaultImage from '../../foto/anonim.jpg';
 
 
 const Header: React.FC = () => {
