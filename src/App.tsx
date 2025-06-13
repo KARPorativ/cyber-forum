@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import './App.css'
 import Layout from './components/Layout/Layout'
 import axios from 'axios'
@@ -56,7 +56,7 @@ function App() {
           <Route path='/question' element={<Question />} />
           <Route path='/addpost' element={<PostCreator />} />
           {/* <Route path='/p' element={<PostFull />} /> */}
-          <Route path='/profile' element={<UserProfile avatarUrl={'src/foto/Никита.jpg'} username={'karp'} quote={'Рациональный иррационалист'} firstName={'Даниил'} lastName={'Розгоняев'} middleName={'Фёдорович'} phone={'89377992781'} city={'Самара'} about={'ывкрмрркврр'} techTags={["karp", "cazan"]} />} />
+          <Route path='/profile' element={<UserProfile  />} />
           <Route path='/profileedit' element={<ProfileEdit />} />
           <Route path='/questions' element={<QuestionList />} />
           <Route path="/post/:_id" element={<PostFull/>} />

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Tag } from '../../../types/Post'
 import classes from './PostItem.module.css'
 
