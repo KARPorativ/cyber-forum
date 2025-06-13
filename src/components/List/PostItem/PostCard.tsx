@@ -2,7 +2,6 @@ import React from 'react';
 import { IPost } from '../../../types/Post';
 import { Link } from 'react-router-dom';
 import { convertDate } from '../../../utils/convertDate';
-import List from '../List';
 import TagsItem from './TagsItem';
 import classes from './PostCard.module.css';
 import defaultImg from '../../../foto/anime3.gif';

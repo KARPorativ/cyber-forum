@@ -1,7 +1,5 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
 import classes from './PostItem.module.css'
-import axios from 'axios';
+
 
 interface IPost{
   post:{

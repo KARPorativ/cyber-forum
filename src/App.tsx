@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import List from './components/List/List'
-import PostItem from './components/List/PostItem/PostItem'
-import Header from './components/header/Header'
-import Stack from './components/stack/Stack'
 import Layout from './components/Layout/Layout'
-import Sorting from './components/sorting/Sorting'
-import Test from './components/test/Test'
 import axios from 'axios'
-import { Route, Router, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import MainPage from './components/Pages/MainPage/MainPage'
 import Question from './components/question/Question'
 import Login from './components/Windows/Login/Login'
 import Register from './components/Windows/Register/Register'
 import PostCreator from './components/Pages/PostCreator/PostCreator'
-import P from './components/Pages/PostFull/PostFull'
+
 import UserProfile from './components/Pages/UserProfile/UserProfile'
 import ProfileEdit from './components/Pages/ProfileEdit/ProfileEdit'
 import QuestionList from './components/QuestionList/QuestionList'
@@ -22,7 +16,7 @@ import PostFull from './components/Pages/PostFull/PostFull'
 
 function App() {
 
-  const [posts, setPosts] = useState([])
+  
 
   useEffect(() => {
     selectOption();
@@ -36,7 +30,7 @@ function App() {
       axios.get("http://localhost:5000/api/getPost", {
         // params: { select }
       }).then(res => {
-        setPosts(res.data)
+        
         console.log(res.data)
       })
       console.log('data--------------------------------------------------------------------', 'lfdedkfe')

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classes from './List.module.css';
  
 interface IListProps<T> {

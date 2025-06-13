@@ -1,10 +1,10 @@
 import Header from '../header/Header'
 import { Outlet } from 'react-router-dom'
-import useIsAuth from '../../hooks/useIsAuth'
 
-type Props = {}
 
-export default function Layout (props: Props) {
+
+
+export default function Layout () {
 
   // useIsAuth();
   
