@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-type Props = {}
 
-const SimilarPost = (props: Props) => {
-  return (
-    <div>SimilarPost</div>
-  )
-}
+
+// const SimilarPost = () => {
+//   return (
+//     <div>SimilarPost</div>
+//   )
+// }

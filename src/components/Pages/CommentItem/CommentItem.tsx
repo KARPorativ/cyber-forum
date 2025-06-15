@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import  { FC, useState } from 'react';
 import { IComment, IUser } from '../../../types/Post';
 import defaultAvatar from "../../../foto/anime4.gif";
 import styles from './CommentItem.module.css';

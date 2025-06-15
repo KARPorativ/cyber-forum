@@ -1,4 +1,6 @@
 export interface IPost {
+    commentsCount: number;
+    image: string;
     _id: string;
     author: IUser;
     userImage: string;

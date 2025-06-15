@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Post from "../Post/Post";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import defaultAvatar from "../../../foto/anonim.jpg";
 import CommentItem from "../CommentItem/CommentItem";
@@ -32,8 +31,10 @@ interface PostProps {
   datePublication: string;
   likesCount: number;
   tags: [
+    t:{
     _id: string,
     tag: string,
+    }
   ];
   comments: Comment[];
   author: {
@@ -212,9 +213,10 @@ const App: React.FC = () => {
         </div>
 
         <div className={styles.tagsContainer}>
-          {post.tags.map((tag, index) => (
+          {post.tags.map((tagg, index) => (
             <span key={index} className={styles.tag}>
-              <span style={{color: "red"}}># </span>{tag.tag}
+              
+              <span style={{color: "red"}}># </span>{tagg.tag}
             </span>
           ))}
         </div>
@@ -226,8 +228,11 @@ const App: React.FC = () => {
         {post.comments.map((comment) => (
           <CommentItem
             key={comment._id}
+            // @ts-ignore
             comment={comment}
+            // @ts-ignore
             postId={_id}
+            // @ts-ignore
             user={userState}
             handleLikeComment={handleLikeCommentClick}
             styles={styles}

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ChangeProfile.module.css';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/reduxHooks';

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import List from '../List/List';
-import axios from 'axios';
+import React from 'react';
 import './QuestionList.module.css';
 import anime1 from '../../foto/anime1.gif';
 import anime2 from '../../foto/anime2.gif';

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import classes from './Question.module.css'
-type Props = {}
 
-export default function Question (props: Props)  {
+
+export default function Question ()  {
 
   const [post, setPost] = useState({title:"karp", description:"fg"})
   const addPost = () => {

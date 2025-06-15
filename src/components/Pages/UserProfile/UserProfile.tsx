@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/reduxHooks';
 import ChangeProfile from './ChangeProfile/ChangeProfile';
 import classes from './UserProfile.module.css';
