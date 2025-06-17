@@ -32,7 +32,7 @@ export default function MainPage  () {
       };
 
       // Отправляем GET-запрос с параметрами
-      const response = await axios.get('http://localhost:5000/api/getPostsWithParams', {
+      const response = await axios.get('https://serverforum.onrender.com/api/getPostsWithParams', {
         params: params
       });
 

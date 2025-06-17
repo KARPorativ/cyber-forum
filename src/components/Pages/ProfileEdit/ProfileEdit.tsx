@@ -139,7 +139,7 @@ const handleRemoveTag = (tagToRemove: string) => {
                 }
             });
             const response = await axios.patch(
-                `http://localhost:5000/api/changeuser/${userState._id}`,
+                `https://serverforum.onrender.com/api/changeuser/${userState._id}`,
                 formData,
                 {
                     headers: {

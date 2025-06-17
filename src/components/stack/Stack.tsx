@@ -15,7 +15,7 @@ export default function Stack() {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/getTags');
+        const response = await axios.get('https://serverforum.onrender.com/api/getTags');
         setTags(response.data);
       } catch (error) {
         console.error('Error fetching tags:', error);

@@ -107,7 +107,7 @@ const PostCreator: React.FC = () => {
         // Использование:
         console.log('FormData as object:', formDataToObject(formData));
         try {
-            const response = await fetch('http://localhost:5000/api/createPost', {
+            const response = await fetch('https://serverforum.onrender.com/api/createPost', {
                 method: 'POST',
                 body: formData,
             });
