@@ -59,7 +59,8 @@ const App: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:5000/api/post/${_id}`);
+      // const response = await axios.get(`http://localhost:5000/api/post/${_id}`);
+      const response = await axios.get(`https://serverforum.onrender.com/api/post/${_id}`);
       setPost(response.data);
       setLikeCount(response.data.likes || 0);
     } catch (err: any) {
@@ -72,7 +73,7 @@ const App: React.FC = () => {
     try {
       console.log('привет')
       const response = await axios.get(
-        `http://localhost:5000/api/post/${_id}/getSimularPosts`
+        `https://serverforum.onrender.com/api/post/${_id}/getSimularPosts`
       );
       // console.log('привет2');
       setSimularPosts(response.data);
@@ -85,7 +86,7 @@ const App: React.FC = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/post/${_id}/getLikePost`
+        `https://serverforum.onrender.com/api/post/${_id}/getLikePost`
       );
       setLikeCount(response.data);
     } catch (err) {
@@ -98,7 +99,7 @@ const App: React.FC = () => {
     if (!newComment) return;
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/post/${_id}/comment`,
+        `https://serverforum.onrender.com/api/post/${_id}/comment`,
         { text: newComment, idUser: userState._id }
       );
       setPost((prevPost) =>
@@ -125,7 +126,7 @@ const App: React.FC = () => {
   const handleLikeClick = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/post/${_id}/likePost`,
+        `https://serverforum.onrender.com/api/post/${_id}/likePost`,
         { idUser: userState._id }
       );
       setLikeCount(response.data);
@@ -137,7 +138,7 @@ const App: React.FC = () => {
   const handleLikeCommentClick = async (commentId: string | number) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/post/${_id}/likeComment`,
+        `https://serverforum.onrender.com/api/post/${_id}/likeComment`,
         {
           idUser: userState._id,
           idComment: commentId,
@@ -151,7 +152,7 @@ const App: React.FC = () => {
 
   const deletePost = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/deletePost/${_id}`);
+      await axios.delete(`https://serverforum.onrender.com/api/deletePost/${_id}`);
       navigate("/");
     } catch (err) {
       console.error("Ошибка при удалении поста", err);
@@ -182,7 +183,7 @@ const App: React.FC = () => {
         <img
           src={
             post.author.avatar
-              ? `http://localhost:5000/${post.author.avatar}`
+              ? `https://serverforum.onrender.com/${post.author.avatar}`
               : defaultAvatar
           }
           alt={`${post.author.userName}'s avatar`}
