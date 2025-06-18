@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { convertDate } from '../../../utils/convertDate';
 import TagsItem from './TagsItem';
 import classes from './PostCard.module.css';
-import defaultImg from '../../../foto/anime3.gif';
+import defaultImg from '../../../foto/defaultProgrammist.gif';
 
 interface PostProps {
     post: IPost;
