@@ -30,7 +30,7 @@ const Header: React.FC = () => {
             {isAuthenticated ? (
               <div className={styles.rightSide}>
                 <Nav.Link as={Link} to="/addpost">Написать пост</Nav.Link>{/* Поменять роутер */}
-                 <Nav.Link as={Link} to="/questions">Задать вопрос</Nav.Link>{/* Поменять роутер */}
+                 {/* <Nav.Link as={Link} to="/questions">Задать вопрос</Nav.Link>Поменять роутер */}
               <Nav.Link as={Link} to="/profile" className={styles.profileLink}>
                 <div className={styles.userInfo}>
                   <span className={styles.userName}>{user.userName}</span>
