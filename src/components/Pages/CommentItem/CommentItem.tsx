@@ -1,6 +1,6 @@
 import  { FC, useState } from 'react';
 import { IComment, IUser } from '../../../types/Post';
-import defaultAvatar from "../../../foto/anime4.gif";
+import defaultAvatar from "../../../foto/defaultProgrammist.gif";
 import styles from './CommentItem.module.css';
 import { Card, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
