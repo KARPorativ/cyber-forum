@@ -35,7 +35,7 @@ const Header: React.FC = () => {
                 <div className={styles.userInfo}>
                   <span className={styles.userName}>{user.userName}</span>
                   <Image 
-                    src={user.avatar ? `http://localhost:5000/${user.avatar}` : defaultImage} 
+                    src={user.avatar ? `https://serverforum.onrender.com/${user.avatar}` : defaultImage} 
                     roundedCircle 
                     className={styles.avatar}
                   />
