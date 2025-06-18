@@ -41,7 +41,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment, user, postId }) => {
       <Card.Body>
         <div className="d-flex align-items-center mb-2">
           <Image
-            src={comment.author.avatar ? `http://localhost:5000/${comment.author.avatar}` : defaultAvatar}
+            src={comment.author.avatar ? `https://serverforum.onrender.com/${comment.author.avatar}` : defaultAvatar}
             alt={`${comment.author.userName}'s avatar`}
             roundedCircle
             className={styles.userAvatar}
