@@ -23,7 +23,7 @@ const Header: React.FC = () => {
             navbarScroll
           >
             <Nav.Link as={Link} to="/">Главная</Nav.Link>
-            <Nav.Link as={Link} to="/questions">Вопросы</Nav.Link>
+            {/* <Nav.Link as={Link} to="/questions">Вопросы</Nav.Link> */}
           </Nav>
           
           <Nav className="ms-auto">
