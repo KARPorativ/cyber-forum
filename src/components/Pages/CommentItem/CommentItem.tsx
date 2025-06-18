@@ -23,7 +23,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment, user, postId }) => {
         // console.log(userState._id, "user");
         
         const response = await axios.post(
-          `http://localhost:5000/api/post/${postId}/likeComment`, {
+          `https://serverforum.onrender.com/api/post/${postId}/likeComment`, {
           idUser: user._id,
           idComment: commentId,
         }
