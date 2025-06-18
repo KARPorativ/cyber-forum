@@ -27,7 +27,7 @@ function App() {
 
   const selectOption = () => {
     try {
-      axios.get("http://localhost:5000/api/getPost", {
+      axios.get("https://serverforum.onrender.com/api/getPost", {
         // params: { select }
       }).then(res => {
         

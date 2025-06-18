@@ -11,7 +11,7 @@ const ChangeProfile = () => {
             <div className={styles.userProfileHeader}>
                 <div className={styles.avatarSection}>
                     <img 
-                        src={user.avatar ? `http://localhost:5000/${user.avatar}` : defaultAvatar} 
+                        src={user.avatar ? `https://serverforum.onrender.com/${user.avatar}` : defaultAvatar} 
                         alt={`${user.userName}'s avatar`} 
                         className={styles.userAvatar}
                         onError={(e) => {

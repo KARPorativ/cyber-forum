@@ -19,7 +19,7 @@ const UserPostItem: React.FC<PostListItemProps> = ({ post }) => {
           {/* Аватар пользователя */}
           <div className="me-3">
             <img
-              src={post?.author?.avatar ? `http://localhost:5000/${post?.author?.avatar}` : defaultAvatar}
+              src={post?.author?.avatar ? `https://serverforum.onrender.com/${post?.author?.avatar}` : defaultAvatar}
               alt={post.userName}
               className="rounded-circle"
               width="40"

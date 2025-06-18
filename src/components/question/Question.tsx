@@ -7,7 +7,7 @@ export default function Question ()  {
 
   const [post, setPost] = useState({title:"karp", description:"fg"})
   const addPost = () => {
-    axios.post("http://localhost:5000/api/addPost", post);
+    axios.post("https://serverforum.onrender.com/api/addPost", post);
     // navigate("/avtorization");
   //
 };
